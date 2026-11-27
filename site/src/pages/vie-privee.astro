@@ -1,0 +1,34 @@
+---
+import Icone from "../components/Icone.astro";
+import Page from "../layouts/Page.astro";
+import { textes } from "../lib/textes.ts";
+---
+
+<Page titre={`${textes.viePrivee} | ${textes.nomDuSite}`} description="Ce site ne garde aucune information sur vous.">
+  <div class="texte">
+    <h1>{textes.viePrivee}</h1>
+    <p class="provisoire"><Icone nom="attention" /><span>{textes.texteProvisoire}</span></p>
+
+    <h2>En simple</h2>
+    <p>Ce site ne garde aucune information sur vous.</p>
+    <ul>
+      <li>Vous n'avez pas de compte à créer.</li>
+      <li>Le site ne pose aucun cookie.</li>
+      <li>Le site ne compte pas ses visiteurs.</li>
+      <li>Il n'y a pas de publicité.</li>
+      <li>Personne ne sait quels mots vous cherchez.</li>
+    </ul>
+
+    <h2>En détail</h2>
+    <h3>Qui est responsable du site ?</h3>
+    <p>Adrien Humilière. Les mentions légales complètes seront ajoutées avant l'ouverture du site.</p>
+    <h3>Quelles données sont traitées ?</h3>
+    <p>Aucune donnée personnelle n'est collectée par le site.</p>
+    <p>La recherche d'un mot se fait dans votre navigateur. Le mot cherché n'est pas envoyé.</p>
+    <p>Le bouton « Tout écouter » utilise la voix de votre appareil.</p>
+    <h3>Hébergement</h3>
+    <p>Le site est hébergé par Railway. Comme tout hébergeur, il reçoit l'adresse de votre appareil pour envoyer les pages.</p>
+    <h3>Cookies et mesure d'audience</h3>
+    <p>Le site n'utilise ni cookie, ni traceur, ni mesure d'audience.</p>
+  </div>
+</Page>

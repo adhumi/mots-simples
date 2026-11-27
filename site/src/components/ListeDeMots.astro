@@ -1,0 +1,23 @@
+---
+import type { FichePubliee } from "../lib/contenu.ts";
+import ImageDeFiche from "./ImageDeFiche.astro";
+import Icone from "./Icone.astro";
+interface Props {
+  fiches: FichePubliee[];
+}
+const { fiches } = Astro.props;
+---
+
+<ul class="liste-de-mots">
+  {
+    fiches.map((f) => (
+      <li>
+        <a class="carte mot" href={`/mot/${f.slug}`}>
+          <ImageDeFiche alt={f.pictogramme.alt} />
+          <span class="mot-nom">{f.mot}</span>
+          <Icone nom="fleche" />
+        </a>
+      </li>
+    ))
+  }
+</ul>

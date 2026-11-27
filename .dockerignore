@@ -1,0 +1,10 @@
+.git
+node_modules
+**/node_modules
+dist
+site/dist
+site/dist-public
+site/dist-interdit
+site/.astro
+ios
+docs

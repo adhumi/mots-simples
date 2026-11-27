@@ -1,0 +1,56 @@
+---
+import Page from "../layouts/Page.astro";
+import { fiches } from "../lib/contenu.ts";
+import { textes } from "../lib/textes.ts";
+
+const validees = fiches.filter((f) => f.statut === "valide").length;
+const relues = fiches.filter((f) => f.statut === "relu").length;
+const brouillons = fiches.filter((f) => f.statut === "brouillon").length;
+const compte = (n: number) => (n === 1 ? "1 mot" : `${n} mots`);
+---
+
+<Page titre={`${textes.aPropos} | ${textes.nomDuSite}`} description="Pour qui est ce dictionnaire, qui le fait, et comment les définitions sont écrites.">
+  <div class="texte">
+    <h1>{textes.aPropos}</h1>
+
+    <h2>À quoi sert ce dictionnaire ?</h2>
+    <p>Mots simples explique les mots compliqués.</p>
+    <p>Ce sont les mots des courriers, des formulaires et des rendez-vous.</p>
+    <p>Chaque mot a une explication courte, une image et un exemple.</p>
+
+    <h2>Pour qui ?</h2>
+    <p>Le dictionnaire est fait pour les personnes qui ont du mal avec les mots compliqués.</p>
+    <p>Il est pensé d'abord avec des adultes qui ont un handicap intellectuel.</p>
+    <p>Il peut aider tout le monde.</p>
+
+    <h2>Combien ça coûte ?</h2>
+    <p>C'est gratuit.</p>
+    <p>Il n'y a pas de publicité.</p>
+    <p>Vous n'avez pas besoin de créer un compte.</p>
+
+    <h2>Qui fait ce dictionnaire ?</h2>
+    <p>Adrien Humilière fait ce dictionnaire. C'est un projet personnel, pour aider.</p>
+
+    <h2>Comment les explications sont écrites ?</h2>
+    <ul>
+      <li>Un ordinateur écrit un premier texte. C'est un brouillon.</li>
+      <li>Une personne vérifie le texte avec une source officielle. Le texte est alors « relu ».</li>
+      <li>Des personnes concernées lisent ou écoutent le texte. Si elles le comprennent, le texte est « validé ».</li>
+    </ul>
+    <p>Sur chaque mot, vous voyez où en est le texte.</p>
+
+    <h2>Où en est le dictionnaire ?</h2>
+    <ul>
+      <li>Validés : {compte(validees)}.</li>
+      <li>Relus, pas encore validés : {compte(relues)}.</li>
+      {brouillons > 0 && <li>Brouillons, visibles seulement sur ce site d'essai : {compte(brouillons)}.</li>}
+    </ul>
+
+    <h2>Attention</h2>
+    <p>Le dictionnaire explique des mots.</p>
+    <p>Il ne remplace pas un médecin, un conseiller ou un avocat.</p>
+
+    <h2>Les images</h2>
+    <p>{textes.creditPictogrammes}</p>
+  </div>
+</Page>

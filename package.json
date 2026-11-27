@@ -12,9 +12,11 @@
     "check": "tsx tools/check-fiches.ts",
     "test": "tsx --test tools/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "ci": "npm run typecheck && npm test && npm run check && npm run build:content && npm run build:content -- --preversion --out dist/preversion/contenu/v1 && npm run embed:content -- --check",
+    "ci": "npm run typecheck && npm test && npm run check && npm run build:content && npm run build:content -- --preversion --out dist/preversion/contenu/v1 && npm run embed:content -- --check && npm run check:site",
     "build:content": "tsx tools/build-content.ts",
-    "embed:content": "tsx tools/embed-content.ts"
+    "embed:content": "tsx tools/embed-content.ts",
+    "build:site": "npm run build --workspace site",
+    "check:site": "node site/controles/controler-le-site.mjs"
   },
   "dependencies": {
     "yaml": "^2.6.0",
@@ -23,6 +25,11 @@
   "devDependencies": {
     "@types/node": "^22.9.0",
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
-  }
+    "typescript": "^5.6.3",
+    "axe-core": "^4.14.1",
+    "playwright": "1.63.0"
+  },
+  "workspaces": [
+    "site"
+  ]
 }

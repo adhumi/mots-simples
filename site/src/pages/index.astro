@@ -1,0 +1,69 @@
+---
+import Icone from "../components/Icone.astro";
+import Page from "../layouts/Page.astro";
+import { fiches, fichesDuTheme, themes } from "../lib/contenu.ts";
+import { textes } from "../lib/textes.ts";
+
+const donnees = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  name: textes.nomDuSite,
+  description: textes.slogan,
+  url: new URL("/", Astro.site).href,
+  inLanguage: "fr",
+};
+---
+
+<Page titre={`${textes.nomDuSite} : ${textes.slogan}`} description={textes.slogan} donnees={donnees}>
+  <h1>{textes.chercherUnMot}</h1>
+
+  {fiches.length === 0 && <p class="carte message">{textes.dictionnaireFerme}</p>}
+
+  {/* La recherche instantanée est un plus : elle n'apparaît que si JavaScript fonctionne. */}
+  <form class="recherche" role="search" action="/mots" hidden data-recherche>
+    <label for="champ-recherche">{textes.ecrivezLeMot}</label>
+    <div class="champ">
+      <Icone nom="loupe" />
+      <input id="champ-recherche" name="q" type="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder={textes.exempleDeRecherche} aria-controls="resultats" />
+    </div>
+  </form>
+  <section id="resultats" aria-live="polite" hidden data-resultats>
+    <h2>{textes.resultats}</h2>
+    <ul class="liste-de-mots" data-liste></ul>
+    <div data-absent hidden>
+      <p class="carte">{textes.motAbsent}</p>
+    </div>
+  </section>
+
+  <h2>{textes.lesThemes}</h2>
+  <ul class="themes">
+    {
+      themes.map((t) => {
+        const n = fichesDuTheme(t.slug).length;
+        return (
+          <li>
+            <a class="carte theme" href={`/theme/${t.slug}`}>
+              <Icone nom={t.slug as any} taille={36} />
+              <span>{t.nom}</span>
+              <small class="message">{n === 1 ? textes.unMot : textes.plusieursMots(n)}</small>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <p class="suite">
+    <a class="bouton" href="/mots">
+      <Icone nom="liste" />
+      <span>{textes.voirTousLesMots}</span>
+    </a>
+  </p>
+
+  <h2>{textes.lApp}</h2>
+  <p>{textes.lAppBientot}</p>
+
+  <script>
+    import "../scripts/recherche.ts";
+  </script>
+</Page>

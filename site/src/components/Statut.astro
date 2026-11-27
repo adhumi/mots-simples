@@ -1,0 +1,46 @@
+---
+// Statut d'une fiche : une image, un mot, une phrase. Jamais la couleur seule.
+import { dateLisible, type FichePubliee } from "../lib/contenu.ts";
+import { textes } from "../lib/textes.ts";
+import Icone from "./Icone.astro";
+interface Props {
+  fiche: FichePubliee;
+}
+const { fiche } = Astro.props;
+const date = fiche.valide_le ? dateLisible(fiche.valide_le) : null;
+---
+
+{
+  fiche.statut === "brouillon" && (
+    <p class="statut brouillon">
+      <Icone nom="attention" />
+      <span>
+        <strong>{textes.brouillonNonRelu}</strong>
+        <br />
+        {textes.brouillonExplication}
+      </span>
+    </p>
+  )
+}
+{
+  fiche.statut === "relu" && (
+    <p class="statut">
+      <Icone nom="sablier" />
+      <span>
+        <strong>{textes.pasEncoreValide}</strong>
+        <br />
+        {textes.pasEncoreValideExplication}
+      </span>
+    </p>
+  )
+}
+{
+  fiche.statut === "valide" && (
+    <p class="statut">
+      <Icone nom="valide" />
+      <span>
+        <strong>{date ? textes.valideLe(date) : textes.valide}</strong>
+      </span>
+    </p>
+  )
+}
