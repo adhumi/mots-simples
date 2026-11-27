@@ -88,6 +88,8 @@ public enum Jetons {
         /// Largeur minimale d'une case de la grille des thèmes.
         public static let caseDeTheme: CGFloat = 150
         public static let imageDeTheme: CGFloat = 40
+        /// Hauteur maximale du choix du mot, par-dessus la caméra.
+        public static let choixDuMot: CGFloat = 360
         public static let vignette: CGFloat = 52
         public static let bordure: CGFloat = 1
         public static let bordureForte: CGFloat = 2

@@ -5,8 +5,12 @@ import SwiftUI
 struct AccueilView: View {
     @Environment(Bibliotheque.self) private var bibliotheque
     @Environment(Aiguillage.self) private var aiguillage
+    @Environment(LecteurVocal.self) private var lecteur
     @State private var requete = ""
     @FocusState private var champActif: Bool
+    @State private var dictee = DicteeVocale()
+    @State private var cameraOuverte = false
+    @State private var cameraRefusee = false
 
     private var requeteUtile: Bool {
         Normalisation.normaliser(requete).count >= IndexDeRecherche.longueurMinimale
@@ -21,6 +25,8 @@ struct AccueilView: View {
                     .accessibilityAddTraits(.isHeader)
 
                 champDeRecherche
+
+                autresFaconsDeChercher
 
                 if bibliotheque.dictionnaire.fiches.isEmpty {
                     message(Textes.dictionnaireVide)
@@ -96,6 +102,74 @@ struct AccueilView: View {
                 .tint(Jetons.Couleur.accent)
                 .accessibilityIdentifier("effacer")
             }
+        }
+    }
+
+    /// Chercher en parlant ou en prenant une photo. Chaque autorisation est demandée au premier usage seulement.
+    @ViewBuilder
+    private var autresFaconsDeChercher: some View {
+        VStack(alignment: .leading, spacing: Jetons.Espace.s) {
+            LigneOuColonne {
+                BoutonDAction(
+                    titre: dictee.etat == .ecoute ? Textes.arreter : Textes.direLeMot,
+                    image: dictee.etat == .ecoute ? "stop.fill" : "mic.fill",
+                    identifiant: "dire-le-mot"
+                ) {
+                    champActif = false
+                    lecteur.arreter()
+                    Task { await dictee.basculer() }
+                }
+                // Sur un appareil sans caméra ou sans prise en charge, le bouton n'apparaît pas.
+                if Camera.priseEnCharge {
+                    BoutonDAction(titre: Textes.prendreEnPhoto, image: "camera.fill", identifiant: "prendre-en-photo") {
+                        champActif = false
+                        lecteur.arreter()
+                        dictee.arreter()
+                        Task {
+                            if await Camera.autorisation() {
+                                cameraRefusee = false
+                                cameraOuverte = true
+                            } else {
+                                cameraRefusee = true
+                            }
+                        }
+                    }
+                }
+            }
+
+            switch dictee.etat {
+            case .ecoute:
+                Label(Textes.jEcoute, systemImage: "waveform")
+                    .police(.corpsFort)
+                    .foregroundStyle(Jetons.Couleur.texte)
+                    .carte()
+            case .refusee:
+                AideAutorisation(texte: Textes.microRefuse)
+            case .indisponible:
+                AideAutorisation(texte: Textes.dicteeIndisponible)
+            case .repos:
+                EmptyView()
+            }
+            if cameraRefusee {
+                AideAutorisation(texte: Textes.cameraRefusee)
+            }
+        }
+        .onChange(of: dictee.texte) { _, entendu in
+            if !entendu.isEmpty { requete = entendu }
+        }
+        .onDisappear { dictee.arreter() }
+        .fullScreenCover(isPresented: $cameraOuverte) {
+            PhotoView { mot in
+                cameraOuverte = false
+                if let fiche = mot.fiche {
+                    requete = ""
+                    aiguillage.allerA(.fiche(fiche.slug))
+                } else {
+                    // Pas de fiche : le mot arrive dans la recherche, qui affiche « Mot absent » et les mots proches.
+                    requete = mot.texte
+                }
+            }
+            .environment(bibliotheque)
         }
     }
 

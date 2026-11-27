@@ -15,6 +15,21 @@ public enum Textes {
     public static var resultats: String { String(localized: "Résultats", bundle: .module) }
     public static var dictionnaireVide: String { String(localized: "Le dictionnaire est vide pour le moment.", bundle: .module) }
 
+    // Chercher en parlant
+    public static var direLeMot: String { String(localized: "Dire le mot", bundle: .module) }
+    public static var jEcoute: String { String(localized: "Je vous écoute. Dites le mot.", bundle: .module) }
+    public static var microRefuse: String { String(localized: "Le micro est coupé pour cette app. Pour dire un mot, ouvrez les réglages et activez le micro et la reconnaissance vocale.", bundle: .module) }
+    public static var dicteeIndisponible: String { String(localized: "Votre téléphone ne peut pas écouter pour le moment. Vous pouvez écrire le mot.", bundle: .module) }
+    public static var ouvrirLesReglages: String { String(localized: "Ouvrir les réglages", bundle: .module) }
+
+    // Photographier un mot
+    public static var prendreEnPhoto: String { String(localized: "Prendre en photo", bundle: .module) }
+    public static var touchezUnMot: String { String(localized: "Montrez le texte, puis touchez un mot.", bundle: .module) }
+    public static var quelMot: String { String(localized: "Quel mot voulez-vous ?", bundle: .module) }
+    public static var choisirUnAutreTexte: String { String(localized: "Choisir un autre texte", bundle: .module) }
+    public static var fermer: String { String(localized: "Fermer", bundle: .module) }
+    public static var cameraRefusee: String { String(localized: "La caméra est coupée pour cette app. Pour prendre un mot en photo, ouvrez les réglages et activez la caméra.", bundle: .module) }
+
     // Thèmes
     public static var voirLesThemes: String { String(localized: "Voir les thèmes", bundle: .module) }
     public static var lesThemes: String { String(localized: "Les thèmes", bundle: .module) }
