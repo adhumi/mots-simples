@@ -1,0 +1,47 @@
+schema: 1
+mot: Bail
+slug: bail
+prononciation: null
+theme: logement
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un bail est un contrat pour louer un logement.
+  - Vous le signez avec le propriétaire.
+  - Il dit combien vous payez et ce que chacun doit faire.
+
+exemple: Avant d'avoir les clés, vous signez le bail de votre appartement.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - loyer
+  - preavis
+  - proprietaire
+  - contrat
+
+formes_de_recherche:
+  - baux
+  - bails
+  - baille
+  - bail de location
+  - contrat de location
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Deux personnes signent un papier devant une maison, avec une clé.
+
+source_de_reference:
+  titre: service-public.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur service-public.fr.
+  - « Contrat » et « propriétaire » sont difficiles. Ils ont leur fiche dans la liste et sont liés.
+  - Il existe des baux pour un commerce ou un terrain. La fiche garde le logement seul.
+  - La synthèse vocale dit-elle bien « baille » ? À écouter.
