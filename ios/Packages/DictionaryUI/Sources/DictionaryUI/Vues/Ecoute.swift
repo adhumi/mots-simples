@@ -16,20 +16,34 @@ struct BoutonEcoute: View {
 
     var body: some View {
         let enCours = lecteur.estEnCours(lecture)
-        Button {
-            lecteur.basculer(lecture, enonces: enonces)
-        } label: {
-            let etiquette = Label(enCours ? Textes.arreter : Textes.ecouter, systemImage: enCours ? "stop.fill" : "speaker.wave.2.fill")
-                .police(avecTexte ? .note : .sousTitre)
+        Group {
             if avecTexte {
-                etiquette.cibleMinimale()
+                Button {
+                    lecteur.basculer(lecture, enonces: enonces)
+                } label: {
+                    Label(enCours ? Textes.arreter : Textes.ecouter, systemImage: enCours ? "stop.fill" : "speaker.wave.2.fill")
+                        .police(.note)
+                        .cibleMinimale()
+                }
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.capsule)
+                .tint(Jetons.Couleur.accent)
             } else {
-                etiquette.labelStyle(.iconOnly).cibleMinimale()
+                // Image seule : un rond de 30 points à l'écran, dans une zone de toucher de 44 points.
+                Button {
+                    lecteur.basculer(lecture, enonces: enonces)
+                } label: {
+                    Image(systemName: enCours ? "stop.fill" : "speaker.wave.2.fill")
+                        .font(.system(size: Jetons.Taille.imageDuBoutonDEcoute, weight: .semibold))
+                        .foregroundStyle(Jetons.Couleur.accent)
+                        .frame(width: Jetons.Taille.boutonDEcoute, height: Jetons.Taille.boutonDEcoute)
+                        .background(Jetons.Couleur.imageNeutre, in: Circle())
+                        .frame(width: Jetons.Taille.cible, height: Jetons.Taille.cible)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
             }
         }
-        .buttonStyle(.bordered)
-        .buttonBorderShape(avecTexte ? .capsule : .circle)
-        .tint(Jetons.Couleur.accent)
         .accessibilityLabel(enCours ? Textes.arreter : libelleAccessible)
         // Le contrôle vocal comprend « Toucher Écouter », même sans texte à l'écran.
         .accessibilityInputLabels([enCours ? Textes.arreter : Textes.ecouter, libelleAccessible])

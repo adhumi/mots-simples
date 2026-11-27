@@ -82,6 +82,10 @@ public enum Jetons {
     public enum Taille {
         /// Cible tactile minimale.
         public static let cible: CGFloat = 44
+        /// Diamètre visible du petit bouton d'écoute. Sa zone de toucher reste de 44 points.
+        public static let boutonDEcoute: CGFloat = 30
+        /// Taille du haut-parleur dans ce bouton.
+        public static let imageDuBoutonDEcoute: CGFloat = 14
         /// Cible visée pour les actions principales.
         public static let ciblePrincipale: CGFloat = 60
         public static let pictogramme: CGFloat = 140
