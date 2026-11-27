@@ -1,0 +1,47 @@
+schema: 1
+mot: Ordonnance
+slug: ordonnance
+prononciation: null
+theme: sante
+statut: brouillon
+valide_le: null
+
+definition:
+  - Une ordonnance est un document écrit par votre médecin.
+  - Elle dit quels médicaments ou quels soins il vous faut.
+  - Vous la donnez au pharmacien pour avoir vos médicaments.
+
+exemple: Le médecin vous remet une ordonnance à la fin du rendez-vous.
+
+autres_sens:
+  - definition:
+      - C'est aussi une décision écrite par un juge.
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - medecin-traitant
+  - posologie
+  - carte-vitale
+
+formes_de_recherche:
+  - ordonnances
+  - ordonance
+  - ordonnence
+  - ordonanse
+  - prescription
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une feuille signée par un médecin, avec une liste de médicaments.
+
+source_de_reference:
+  titre: ameli.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur ameli.fr.
+  - D'autres soignants écrivent des ordonnances, par exemple un dentiste. La fiche dit « médecin » pour rester simple.
+  - Le sens de justice est rare pour le lecteur. À garder ou à retirer.
