@@ -1,0 +1,49 @@
+schema: 1
+mot: Fiche de paie
+slug: fiche-de-paie
+prononciation: null
+theme: travail
+statut: brouillon
+valide_le: null
+
+definition:
+  - Une fiche de paie est un document que votre employeur vous donne chaque mois.
+  - Elle dit combien vous gagnez et combien vous recevez vraiment sur votre compte.
+  - Elle sert souvent de preuve, par exemple pour louer un logement.
+
+exemple: Pour louer un appartement, vous montrez vos dernières fiches de paie.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - salaire-brut
+  - salaire-net
+  - employeur
+  - contrat-de-travail
+
+formes_de_recherche:
+  - fiches de paie
+  - fiche de paye
+  - fiche de pai
+  - feuille de paie
+  - fiche de salaire
+  - bulletin de paie
+  - bulletin de salaire
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une feuille avec des lignes de chiffres et le mot salaire.
+
+source_de_reference:
+  titre: service-public.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur service-public.fr.
+  - La deuxième phrase évite « brut », « net » et « cotisations ». Elle reste longue, à tester en séance.
+  - Le nom officiel est « bulletin de paie ». Il est dans les formes de recherche.
+  - « Employeur » est difficile. Il a sa fiche dans la liste et il est lié.
