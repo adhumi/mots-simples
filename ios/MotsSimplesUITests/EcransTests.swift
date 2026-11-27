@@ -13,7 +13,7 @@ final class EcransTests: XCTestCase {
             app.launchArguments += ["-UIPreferredContentSizeCategoryName", tailleDeTexte]
         }
         app.launch()
-        XCTAssertTrue(app.textFields["champ-recherche"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.champDeRecherche.waitForExistence(timeout: 5))
         return app
     }
 
@@ -27,7 +27,7 @@ final class EcransTests: XCTestCase {
 
     @MainActor
     private func chercher(_ app: XCUIApplication, _ texte: String) {
-        let champ = app.textFields["champ-recherche"]
+        let champ = app.champDeRecherche
         champ.tap()
         champ.typeText(texte)
     }
@@ -57,15 +57,17 @@ final class EcransTests: XCTestCase {
         app.buttons["theme-sante"].tap()
         XCTAssertTrue(app.buttons["mot-ordonnance"].waitForExistence(timeout: 5))
         app.navigationBars.buttons.firstMatch.tap()
-        XCTAssertTrue(app.textFields["champ-recherche"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.champDeRecherche.waitForExistence(timeout: 5))
     }
 
     @MainActor
     func testAuditDuMotAbsent() throws {
         let app = lancer()
-        chercher(app, "girafe")
+        // « Rechercher » range le clavier : l'audit porte sur l'écran de l'app, pas sur le clavier du système.
+        chercher(app, "girafe\n")
         XCTAssertTrue(app.staticTexts["Ce mot n'est pas encore dans le dictionnaire."].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["demander-ce-mot"].exists)
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
         try app.auditer("testAuditDuMotAbsent-1")
     }
 

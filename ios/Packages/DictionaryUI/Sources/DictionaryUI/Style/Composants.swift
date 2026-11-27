@@ -93,7 +93,7 @@ struct ImageDeFiche: View {
             .fill(Jetons.Couleur.imageNeutre)
             .frame(width: taille, height: taille)
             .overlay(
-                Image(systemName: "photo")
+                Image(systemName: taille >= Jetons.Taille.pictogramme ? "photo" : "photo.fill")
                     .resizable()
                     .scaledToFit()
                     .padding(taille / 4)

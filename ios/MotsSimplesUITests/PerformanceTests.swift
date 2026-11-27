@@ -17,7 +17,7 @@ final class PerformanceTests: XCTestCase {
     func testRecherche() {
         let app = XCUIApplication()
         app.launch()
-        let champ = app.textFields["champ-recherche"]
+        let champ = app.champDeRecherche
         XCTAssertTrue(champ.waitForExistence(timeout: 5))
         champ.tap()
         champ.typeText("fa")

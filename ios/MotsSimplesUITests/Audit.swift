@@ -1,6 +1,12 @@
 import XCTest
 
 extension XCUIApplication {
+    /// Le champ de recherche de l'accueil, quel que soit son type pour XCUITest.
+    @MainActor
+    var champDeRecherche: XCUIElement {
+        descendants(matching: .any).matching(identifier: "champ-recherche").firstMatch
+    }
+
     /// Lance l'audit d'accessibilité d'Apple et écrit chaque défaut dans le journal, avec l'élément concerné.
     /// Tous les défauts d'un écran sont relevés d'un coup, puis le test échoue s'il y en a.
     /// Les lignes « AUDIT » se retrouvent dans le résumé de l'intégration continue.

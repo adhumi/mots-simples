@@ -95,7 +95,9 @@ struct FicheView: View {
             }
             .miseEnPageDEcran()
         }
-        .safeAreaInset(edge: .bottom) {
+        // Le texte qui défile sous la barre flottante ne se lit pas au travers : le bord du défilement est net.
+        .scrollEdgeEffectStyle(.hard, for: .bottom)
+        .safeAreaBar(edge: .bottom) {
             BarreToutEcouter(enonces: lecture.tout)
         }
         .navigationTitle(fiche.mot)
