@@ -49,10 +49,8 @@ struct AccueilView: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .background(Jetons.Couleur.fond)
-        // Le texte qui défile sous le bouton flottant ne se lit pas au travers : le bord du défilement est net.
-        .scrollEdgeEffectStyle(.hard, for: .bottom)
         // Bouton flottant, en verre : le seul chemin vers les thèmes. Pas de barre d'onglets.
-        .safeAreaBar(edge: .bottom) {
+        .safeAreaInset(edge: .bottom) {
             if !champActif && !configuration.modeReduit && !bibliotheque.dictionnaire.fiches.isEmpty {
                 Button {
                     aiguillage.allerA(.themes)
@@ -89,24 +87,7 @@ struct AccueilView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Jetons.Couleur.accent)
                     .accessibilityHidden(true)
-                // Le texte d'exemple prend la couleur secondaire de l'app : le gris du système est trop pâle.
-                // Le champ passe à la ligne aux grandes tailles de texte, au lieu de couper le mot.
-                TextField(
-                    Textes.exempleDeRecherche,
-                    text: $requete,
-                    prompt: Text(Textes.exempleDeRecherche).foregroundStyle(Jetons.Couleur.texteSecondaire),
-                    axis: .vertical
-                )
-                    .lineLimit(1...3)
-                    // « Rechercher » range le clavier : les résultats prennent tout l'écran.
-                    // Dans un champ qui passe à la ligne, la touche écrit un retour à la ligne : on le retire.
-                    .onSubmit { champActif = false }
-                    .onChange(of: requete) { _, saisie in
-                        if saisie.contains(where: \.isNewline) {
-                            requete = saisie.filter { !$0.isNewline }
-                            champActif = false
-                        }
-                    }
+                TextField(Textes.exempleDeRecherche, text: $requete)
                     .police(.sousTitre)
                     .foregroundStyle(Jetons.Couleur.texte)
                     .textInputAutocapitalization(.never)
@@ -132,7 +113,7 @@ struct AccueilView: View {
                         .police(.note)
                         .cibleMinimale()
                 }
-                .buttonStyle(.secondaire)
+                .buttonStyle(.bordered)
                 .buttonBorderShape(.capsule)
                 .tint(Jetons.Couleur.accent)
                 .accessibilityIdentifier("effacer")

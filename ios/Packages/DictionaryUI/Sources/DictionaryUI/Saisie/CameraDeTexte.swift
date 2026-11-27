@@ -128,7 +128,7 @@ struct PhotoView: View {
                             .police(mot.fiche == nil ? .corps : .corpsFort)
                             .frame(maxWidth: .infinity, minHeight: Jetons.Taille.cible, alignment: .leading)
                     }
-                    .buttonStyle(.secondaire)
+                    .buttonStyle(.bordered)
                     .buttonBorderShape(.roundedRectangle(radius: Jetons.Rayon.bouton))
                     .tint(Jetons.Couleur.accent)
                 }

@@ -35,6 +35,7 @@ GitHub Actions lance deux séries de contrôles sur chaque demande de fusion et 
 - `.github/workflows/ci.yml` : `npm run ci`, sous Linux. Fiches, outils, paquet de contenu, site, point de collecte.
 - `.github/workflows/ios.yml` : sur macOS, `swift test` pour `DictionaryCore`, puis la compilation de l'app
   et ses tests d'interface dans le simulateur. Elle ne tourne que si `ios/`, `content/` ou `tools/` changent.
+  L'audit d'accessibilité automatique d'Apple y est désactivé : voir `ios/MotsSimplesUITests/Audit.swift`.
 
 ## Licences
 

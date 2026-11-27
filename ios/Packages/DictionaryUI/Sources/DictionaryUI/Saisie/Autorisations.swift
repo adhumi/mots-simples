@@ -26,7 +26,7 @@ struct AideAutorisation: View {
                     .police(.note)
                     .cibleMinimale()
             }
-            .buttonStyle(.secondaire)
+            .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
             .tint(Jetons.Couleur.accent)
         }
@@ -47,7 +47,7 @@ struct BoutonDAction: View {
                 .police(.corpsFort)
                 .frame(maxWidth: .infinity, minHeight: Jetons.Taille.ciblePrincipale)
         }
-        .buttonStyle(.secondaire)
+        .buttonStyle(.bordered)
         .buttonBorderShape(.roundedRectangle(radius: Jetons.Rayon.bouton))
         .tint(Jetons.Couleur.accent)
         .accessibilityIdentifier(identifiant)

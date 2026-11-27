@@ -1,17 +1,20 @@
 import XCTest
 
-extension XCUIApplication {
-    /// Le champ de recherche de l'accueil, quel que soit son type pour XCUITest.
-    @MainActor
-    var champDeRecherche: XCUIElement {
-        descendants(matching: .any).matching(identifier: "champ-recherche").firstMatch
-    }
+/// L'audit d'accessibilité automatique d'Apple est désactivé, à la demande d'Adrien (27 novembre 2026).
+/// Les tests d'interface parcourent toujours les mêmes écrans, mais ne lancent plus l'audit.
+/// Pour le relancer à la main, passer `actif` à `true` : chaque défaut est alors écrit dans le journal,
+/// avec l'élément concerné et sa position. Ce que l'audit a relevé est noté dans docs/rapports/lot-4.md.
+enum AuditDAccessibilite {
+    static let actif = false
+}
 
-    /// Lance l'audit d'accessibilité d'Apple et écrit chaque défaut dans le journal, avec l'élément concerné.
+extension XCUIApplication {
+    /// Lance l'audit d'accessibilité d'Apple sur l'écran courant, s'il est activé.
     /// Tous les défauts d'un écran sont relevés d'un coup, puis le test échoue s'il y en a.
-    /// Les lignes « AUDIT » se retrouvent dans le résumé de l'intégration continue.
     @MainActor
     func auditer(_ ecran: String, fichier: StaticString = #filePath, ligne: UInt = #line) throws {
+        guard AuditDAccessibilite.actif else { return }
+
         nonisolated(unsafe) var defauts: [String] = []
         try performAccessibilityAudit { defaut in
             // L'audit appelle ce bloc sur le fil principal.

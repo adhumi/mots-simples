@@ -2,8 +2,9 @@
 
 Swift 6, SwiftUI, iOS 26 au minimum, iPhone et iPad. Aucune dépendance tierce.
 
-**Important : ce code a été écrit sans Xcode ni compilateur Swift.**
-Il n'a jamais été compilé. Voir `docs/rapports/lot-2.md` et `docs/rapports/lot-4.md` pour ce que cela implique. La marche vers TestFlight est dans `docs/testflight.md`.
+**Ce code a été écrit sans Xcode ni compilateur Swift.**
+Depuis, GitHub Actions le compile et lance ses tests sur macOS : voir `.github/workflows/ios.yml`.
+Il n'a pas encore été essayé à la main sur un simulateur ou un téléphone. Voir `docs/rapports/lot-2.md` et `docs/rapports/lot-4.md` pour ce que cela implique. La marche vers TestFlight est dans `docs/testflight.md`.
 
 ## Structure
 
@@ -12,7 +13,7 @@ Il n'a jamais été compilé. Voir `docs/rapports/lot-2.md` et `docs/rapports/lo
 | `Packages/DictionaryCore` | Modèle, chargement vérifié du paquet, recherche, derniers mots. Testé avec Swift Testing |
 | `Packages/DictionaryUI` | Écrans SwiftUI, écoute, jetons de style, police Lexend, catalogue de chaînes |
 | `MotsSimples/` | La cible d'app : point d'entrée, « Expliquer un mot » pour Siri, manifeste de confidentialité, contenu embarqué |
-| `MotsSimplesUITests/` | Tests d'interface : audit d'accessibilité sur chaque écran, captures, mesures de performance |
+| `MotsSimplesUITests/` | Tests d'interface sur chaque écran, captures, mesures de performance. L'audit d'accessibilité automatique est désactivé dans `Audit.swift` |
 | `Config/` | `Info.plist`, droits de l'app et réglages de compilation |
 
 ## Embarquer le contenu

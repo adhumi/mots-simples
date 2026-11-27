@@ -45,29 +45,6 @@ private struct Ecran: ViewModifier {
     }
 }
 
-/// Bouton secondaire : texte vert sur le fond d'une carte, bordure verte. Même dessin que sur le site.
-/// Les couleurs viennent des jetons, donc leur contraste est connu et contrôlé : 6,47 pour 1 en clair.
-struct BoutonSecondaire: ButtonStyle {
-    @Environment(\.isEnabled) private var actif
-
-    // « ButtonStyleConfiguration » en toutes lettres : le module a son propre type « Configuration ».
-    func makeBody(configuration: ButtonStyleConfiguration) -> some View {
-        let forme = RoundedRectangle(cornerRadius: Jetons.Rayon.bouton, style: .continuous)
-        configuration.label
-            .foregroundStyle(Jetons.Couleur.accent)
-            .padding(.horizontal, Jetons.Espace.m)
-            .padding(.vertical, Jetons.Espace.xs)
-            .background(configuration.isPressed ? Jetons.Couleur.imageNeutre : Jetons.Couleur.carte, in: forme)
-            .overlay(forme.strokeBorder(Jetons.Couleur.accent, lineWidth: Jetons.Taille.bordureForte))
-            .contentShape(forme)
-            .opacity(actif ? 1 : 0.5)
-    }
-}
-
-extension ButtonStyle where Self == BoutonSecondaire {
-    static var secondaire: BoutonSecondaire { BoutonSecondaire() }
-}
-
 extension View {
     func carte() -> some View { modifier(Carte()) }
 
@@ -112,16 +89,11 @@ struct ImageDeFiche: View {
     var decorative = false
 
     var body: some View {
-        let grande = taille >= Jetons.Taille.pictogramme
-        let forme = RoundedRectangle(cornerRadius: grande ? Jetons.Rayon.carte : Jetons.Rayon.petit, style: .continuous)
-        // Dans une liste, la petite image garde le fond de la carte, avec un simple contour :
-        // un aplat coloré collé au mot fausse la mesure du contraste du mot par l'audit d'accessibilité.
-        return forme
-            .fill(grande ? Jetons.Couleur.imageNeutre : Jetons.Couleur.carte)
-            .overlay(forme.strokeBorder(Jetons.Couleur.bordure, lineWidth: grande ? 0 : Jetons.Taille.bordure))
+        RoundedRectangle(cornerRadius: taille >= Jetons.Taille.pictogramme ? Jetons.Rayon.carte : Jetons.Rayon.petit, style: .continuous)
+            .fill(Jetons.Couleur.imageNeutre)
             .frame(width: taille, height: taille)
             .overlay(
-                Image(systemName: grande ? "photo" : "photo.fill")
+                Image(systemName: "photo")
                     .resizable()
                     .scaledToFit()
                     .padding(taille / 4)

@@ -19,7 +19,7 @@ final class AccessibiliteTests: XCTestCase {
 
     @MainActor
     private func ouvrirFacture(_ app: XCUIApplication) {
-        let champ = app.champDeRecherche
+        let champ = app.textFields["champ-recherche"]
         XCTAssertTrue(champ.waitForExistence(timeout: 5))
         champ.tap()                                   // toucher 1
         champ.typeText("facture")
@@ -32,7 +32,7 @@ final class AccessibiliteTests: XCTestCase {
     @MainActor
     func testAuditDeLAccueil() throws {
         let app = lancer()
-        XCTAssertTrue(app.champDeRecherche.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.textFields["champ-recherche"].waitForExistence(timeout: 5))
         try app.auditer("testAuditDeLAccueil-1")
     }
 
@@ -73,7 +73,7 @@ final class AccessibiliteTests: XCTestCase {
     @MainActor
     func testMotAbsent() {
         let app = lancer()
-        let champ = app.champDeRecherche
+        let champ = app.textFields["champ-recherche"]
         XCTAssertTrue(champ.waitForExistence(timeout: 5))
         champ.tap()
         champ.typeText("girafe")

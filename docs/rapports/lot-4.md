@@ -2,6 +2,33 @@
 
 27 novembre 2026. Branche `lot-4`, partie de `lot-3`.
 
+## Mise à jour du 27 novembre 2026, après la mise en place de la CI
+
+Depuis l'écriture de ce rapport, GitHub Actions compile et teste l'app sur macOS, avec Xcode 26.6 et un iPhone 17 en iOS 26.5.
+Ce qui suit corrige donc la section « À lire d'abord » ci-dessous.
+
+- **Le Swift compile**, app et tests, y compris le projet Xcode écrit à la main, la scène d'Accès d'aide et le style en verre.
+- **`swift test` passe** sur `DictionaryCore`.
+- **Les tests d'interface qui ne sont pas des audits passent** : recherche, fiche, écoute, thèmes, mot absent, aide, partage.
+- **L'audit d'accessibilité automatique d'Apple est désactivé**, à la demande d'Adrien. L'interrupteur est dans
+  `ios/MotsSimplesUITests/Audit.swift`. Les tests parcourent toujours les mêmes écrans, sans lancer l'audit.
+- Les essais de correction faits pour cet audit ont été annulés : l'interface est revenue à son état d'avant.
+
+Ce que l'audit a relevé avant d'être désactivé, pour mémoire. Tout concerne le contraste, rien d'autre de bloquant :
+
+| Écran | Constat |
+| --- | --- |
+| Fiche | Les phrases qui défilent sous le bouton flottant « Tout écouter » échouent au contraste, ainsi que le libellé du bouton. La phrase juste au-dessus passe |
+| Accueil, plus grande taille de texte | Même constat sous le bouton flottant « Voir les thèmes » |
+| Listes de mots | Un défaut par ligne, sur le mot. Cause non établie : peut-être la petite image neutre collée au mot |
+| Champ de recherche | « Le texte peut être coupé aux grandes tailles de texte » |
+| Mot absent | Défauts du clavier du système, affiché par-dessus l'écran pendant l'audit |
+
+La question de fond reste ouverte : du texte se lit au travers des boutons flottants en verre.
+C'est à regarder sur un vrai téléphone et à trancher avec les maquettes, comme le prévoyaient les specs.
+Les API d'Apple compilent, mais leur comportement n'a toujours pas été vérifié à l'œil ni dans la documentation.
+Aucune mesure de performance n'a été faite.
+
 ## À lire d'abord
 
 **Le code Swift de ce lot, comme celui du lot 2, n'a jamais été compilé.** Pas de Xcode, pas de compilateur Swift, pas de simulateur.

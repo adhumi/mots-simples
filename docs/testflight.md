@@ -2,15 +2,15 @@
 
 Rien n'est envoyé. Ce document dit à Adrien quoi régler et quoi tester avant d'envoyer un build.
 
-**À savoir d'abord** : le code Swift n'a jamais été compilé, voir `docs/rapports/lot-4.md`.
-La première étape est donc de le faire compiler, pas de l'envoyer.
+**À savoir d'abord** : le code Swift compile et ses tests passent dans GitHub Actions, voir `docs/rapports/lot-4.md`.
+Il n'a pas encore été essayé à la main. La première étape est donc de le lancer, pas de l'envoyer.
 
 ## 1. Faire compiler
 
 1. Ouvrir `ios/MotsSimples.xcodeproj` dans Xcode 26. S'il ne s'ouvre pas : `ios/README.md`, « Si le projet Xcode ne s'ouvre pas ».
 2. `cd ios/Packages/DictionaryCore && swift test`. 40 tests, sans simulateur.
 3. Compiler l'app pour un simulateur iOS 26. Corriger ce qui bloque. Les endroits les plus risqués sont listés dans le rapport.
-4. Lancer les tests d'interface : 17 tests, dont les audits d'accessibilité.
+4. Lancer les tests d'interface : 17 tests. L'audit d'accessibilité automatique est désactivé, voir `ios/MotsSimplesUITests/Audit.swift`.
 
 ## 2. Ce qu'il faut régler dans Xcode
 

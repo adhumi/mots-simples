@@ -19,7 +19,6 @@ struct LigneDeMot: View {
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer(minLength: Jetons.Espace.s)
                     Image(systemName: "chevron.right")
-                        .fontWeight(.bold)
                         .foregroundStyle(Jetons.Couleur.accent)
                         .accessibilityHidden(true)
                 }

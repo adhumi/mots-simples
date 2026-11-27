@@ -19,7 +19,7 @@ struct BoutonEcoute: View {
                 .police(.note)
                 .cibleMinimale()
         }
-        .buttonStyle(.secondaire)
+        .buttonStyle(.bordered)
         .buttonBorderShape(.capsule)
         .tint(Jetons.Couleur.accent)
         .accessibilityLabel(enCours ? Textes.arreter : libelleAccessible)
@@ -111,7 +111,7 @@ struct ChoixDeVitesse: View {
             .police(choisie ? .corpsFort : .corps)
             .frame(maxWidth: .infinity, minHeight: Jetons.Taille.cible)
         }
-        .buttonStyle(.secondaire)
+        .buttonStyle(.bordered)
         .buttonBorderShape(.roundedRectangle(radius: Jetons.Rayon.bouton))
         .tint(Jetons.Couleur.accent)
         .accessibilityAddTraits(choisie ? .isSelected : [])
