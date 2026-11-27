@@ -1,0 +1,48 @@
+schema: 1
+mot: Échéance
+slug: echeance
+prononciation: null
+theme: argent
+statut: brouillon
+valide_le: null
+
+definition:
+  - Une échéance est la date limite pour payer quelque chose.
+  - Après cette date, vous êtes en retard.
+
+exemple: L'échéance de votre facture est écrite en haut du courrier.
+
+autres_sens:
+  - definition:
+      - C'est aussi une somme d'argent à payer à une date prévue.
+    exemple: Vous payez votre canapé en plusieurs échéances.
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - facture
+  - prelevement
+  - mensualite
+  - date-limite
+
+formes_de_recherche:
+  - échéances
+  - écheance
+  - échéence
+  - échance
+  - date d'échéance
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Un calendrier avec une date entourée en rouge.
+
+source_de_reference:
+  titre: mesquestionsdargent.fr (Banque de France), page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur mesquestionsdargent.fr.
+  - Le deuxième sens, la somme à payer, est proche de « mensualité ». À garder ou à retirer.
+  - Une échéance peut aussi être la fin d'un contrat. Sens écarté pour rester simple.
