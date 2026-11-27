@@ -1,0 +1,53 @@
+schema: 1
+mot: Préavis
+slug: preavis
+prononciation: null
+theme: logement
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un préavis est un temps à respecter avant de quitter votre logement.
+  - Il commence quand vous prévenez le propriétaire de votre départ.
+  - Pendant ce temps, vous payez encore le loyer.
+
+exemple: Vous envoyez une lettre au propriétaire pour commencer votre préavis.
+
+autres_sens:
+  - definition:
+      - Au travail, c'est le temps entre l'annonce du départ et le dernier jour.
+    exemple: Après sa démission, Karim travaille encore pendant son préavis.
+  - definition:
+      - C'est aussi l'annonce d'une grève, faite quelques jours avant.
+    exemple: Un préavis de grève annonce moins de trains demain.
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - bail
+  - loyer
+  - proprietaire
+  - demission
+
+formes_de_recherche:
+  - préavi
+  - pré-avis
+  - préavie
+  - lettre de préavis
+  - préavis de départ
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une lettre, un calendrier, puis des cartons de déménagement.
+
+source_de_reference:
+  titre: service-public.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur service-public.fr.
+  - La durée du préavis n'est pas donnée, c'est voulu. Elle dépend du bail et de la situation.
+  - Le propriétaire aussi peut donner un préavis. La fiche prend le point de vue du locataire.
+  - Trois sens, c'est beaucoup. Le sens « grève » peut partir si la fiche est trop longue.
