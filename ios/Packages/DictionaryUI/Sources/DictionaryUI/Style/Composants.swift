@@ -112,11 +112,16 @@ struct ImageDeFiche: View {
     var decorative = false
 
     var body: some View {
-        RoundedRectangle(cornerRadius: taille >= Jetons.Taille.pictogramme ? Jetons.Rayon.carte : Jetons.Rayon.petit, style: .continuous)
-            .fill(Jetons.Couleur.imageNeutre)
+        let grande = taille >= Jetons.Taille.pictogramme
+        let forme = RoundedRectangle(cornerRadius: grande ? Jetons.Rayon.carte : Jetons.Rayon.petit, style: .continuous)
+        // Dans une liste, la petite image garde le fond de la carte, avec un simple contour :
+        // un aplat coloré collé au mot fausse la mesure du contraste du mot par l'audit d'accessibilité.
+        return forme
+            .fill(grande ? Jetons.Couleur.imageNeutre : Jetons.Couleur.carte)
+            .overlay(forme.strokeBorder(Jetons.Couleur.bordure, lineWidth: grande ? 0 : Jetons.Taille.bordure))
             .frame(width: taille, height: taille)
             .overlay(
-                Image(systemName: taille >= Jetons.Taille.pictogramme ? "photo" : "photo.fill")
+                Image(systemName: grande ? "photo" : "photo.fill")
                     .resizable()
                     .scaledToFit()
                     .padding(taille / 4)
