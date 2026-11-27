@@ -1,0 +1,107 @@
+# App iOS : tests de DictionaryCore, compilation de l'app, tests d'interface dans le simulateur.
+# Tourne sur un runner macOS, seulement quand l'app ou son contenu changent.
+name: iOS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ios/**"
+      - "content/**"
+      - "tools/**"
+      - ".github/workflows/ios.yml"
+  pull_request:
+    paths:
+      - "ios/**"
+      - "content/**"
+      - "tools/**"
+      - ".github/workflows/ios.yml"
+
+concurrency:
+  group: ios-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  coeur:
+    name: DictionaryCore, swift test
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versions
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: swift test
+        working-directory: ios/Packages/DictionaryCore
+        run: swift test
+
+  app:
+    name: App, compilation et tests d'interface
+    runs-on: macos-26
+    timeout-minutes: 45
+    env:
+      PROJET: ios/MotsSimples.xcodeproj
+      SCHEMA: MotsSimples
+      DONNEES: ${{ github.workspace }}/DerivedData
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versions
+        run: xcodebuild -version
+
+      # Le premier iPhone disponible dans le simulateur le plus récent du runner.
+      - name: Choisir un simulateur
+        run: |
+          xcrun simctl list devices available
+          IDENTIFIANT=$(xcrun simctl list devices available --json \
+            | python3 -c 'import json,sys
+          appareils = json.load(sys.stdin)["devices"]
+          iphones = [(systeme, a) for systeme, liste in appareils.items() if "iOS" in systeme for a in liste if a["name"].startswith("iPhone")]
+          iphones.sort(key=lambda paire: [int(n) for n in paire[0].split("iOS-")[-1].split("-")])
+          print(iphones[-1][1]["udid"])')
+          echo "Simulateur retenu : $IDENTIFIANT"
+          echo "DESTINATION=platform=iOS Simulator,id=$IDENTIFIANT" >> "$GITHUB_ENV"
+
+      # Ni équipe ni signature : le simulateur n'en a pas besoin.
+      - name: Compiler l'app et ses tests
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -project "$PROJET" -scheme "$SCHEMA" \
+            -destination "$DESTINATION" \
+            -derivedDataPath "$DONNEES" \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee compilation.log | tail -n 200
+
+      # Les mesures de performance n'ont pas de sens sur un runner partagé : elles restent à lancer à la main.
+      - name: Tests d'interface et audits d'accessibilité
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building \
+            -project "$PROJET" -scheme "$SCHEMA" \
+            -destination "$DESTINATION" \
+            -derivedDataPath "$DONNEES" \
+            -resultBundlePath Resultats.xcresult \
+            -skip-testing:MotsSimplesUITests/PerformanceTests \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee tests.log | tail -n 200
+
+      # Le résultat contient les captures aux grandes tailles de texte et le détail des audits.
+      - name: Garder les journaux et le résultat des tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-resultats
+          path: |
+            compilation.log
+            tests.log
+            Resultats.xcresult
+          if-no-files-found: ignore
+          retention-days: 14

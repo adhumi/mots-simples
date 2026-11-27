@@ -1,0 +1,38 @@
+# Contenu, outils, site et point de collecte : exactement ce que lance « npm run ci ».
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  outils-et-site:
+    name: Fiches, outils, site, point de collecte
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer
+        run: npm ci
+
+      # Le contrôle du site ouvre les pages dans un navigateur, pour l'audit d'accessibilité.
+      - name: Installer le navigateur de test
+        run: npx playwright install --with-deps chromium
+
+      # Typage, tests, contrôle des fiches, paquet de contenu, contenu embarqué à jour, contrôle du site.
+      - name: npm run ci
+        run: npm run ci
