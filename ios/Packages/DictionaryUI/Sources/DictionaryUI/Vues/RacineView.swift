@@ -40,6 +40,7 @@ public struct RacineView: View {
         .environment(aiguillage)
         .environment(demandes)
         .environment(\.configuration, configuration)
+        .tint(Jetons.Couleur.accent)
         // À l'ouverture et à chaque retour dans l'app : les mots demandés sans réseau partent, et le contenu se met à jour.
         // Rien n'est demandé à la personne, et aucune erreur n'est affichée.
         .task(id: phase) {
@@ -64,6 +65,5 @@ public struct RacineView: View {
     private func ouvrir(_ adresse: URL) {
         guard let slug = LienDeMot.slug(depuis: adresse) else { return }
         aiguillage.ouvrir(.fiche(slug))
-        .tint(Jetons.Couleur.accent)
     }
 }

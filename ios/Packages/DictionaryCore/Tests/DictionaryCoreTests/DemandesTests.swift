@@ -33,7 +33,8 @@ struct DemandesTests {
         file.ajouter("hypothèque")
         file.ajouter("caution")
         #expect(file.mots == ["hypothèque", "caution"])
-        for n in 0..<30 { file.ajouter("mot \(String(UnicodeScalar(UInt8(97 + n % 26))))\(n > 25 ? "bis" : "")") }
+        let lettres = Array("abcdefghijklmnopqrstuvwxyzàâéèêîôûç")
+        for lettre in lettres.prefix(30) { file.ajouter("mot \(lettre)") }
         #expect(file.mots.count == 20)
     }
 
