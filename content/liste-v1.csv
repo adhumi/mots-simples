@@ -1,0 +1,107 @@
+mot,slug,theme,lot,source
+Facture,facture,argent,1,service-public.fr
+Échéance,echeance,argent,1,mesquestionsdargent.fr (Banque de France)
+Prélèvement,prelevement,argent,1,mesquestionsdargent.fr (Banque de France)
+RIB,rib,argent,1,mesquestionsdargent.fr (Banque de France)
+AAH,aah,argent,1,monparcourshandicap.gouv.fr
+Ordonnance,ordonnance,sante,1,ameli.fr
+Mutuelle,mutuelle,sante,1,ameli.fr
+Carte Vitale,carte-vitale,sante,1,ameli.fr
+Médecin traitant,medecin-traitant,sante,1,ameli.fr
+Bail,bail,logement,1,service-public.fr
+Loyer,loyer,logement,1,service-public.fr
+Préavis,preavis,logement,1,service-public.fr
+Fiche de paie,fiche-de-paie,travail,1,service-public.fr
+Congés payés,conges-payes,travail,1,code.travail.gouv.fr
+ESAT,esat,travail,1,monparcourshandicap.gouv.fr
+Justificatif de domicile,justificatif-de-domicile,papiers,1,service-public.fr
+Formulaire,formulaire,papiers,1,
+MDPH,mdph,papiers,1,monparcourshandicap.gouv.fr
+Curatelle,curatelle,justice,1,service-public.fr
+Rendez-vous,rendez-vous,vie-quotidienne,1,
+Virement,virement,argent,2,mesquestionsdargent.fr (Banque de France)
+Découvert,decouvert,argent,2,mesquestionsdargent.fr (Banque de France)
+Relevé de compte,releve-de-compte,argent,2,mesquestionsdargent.fr (Banque de France)
+Remboursement,remboursement,argent,2,
+Mensualité,mensualite,argent,2,mesquestionsdargent.fr (Banque de France)
+Impôt,impot,argent,2,impots.gouv.fr
+Avis d'imposition,avis-d-imposition,argent,2,impots.gouv.fr
+Quotient familial,quotient-familial,argent,2,caf.fr
+Allocation,allocation,argent,2,caf.fr
+Trop-perçu,trop-percu,argent,2,caf.fr
+PCH,pch,argent,2,monparcourshandicap.gouv.fr
+Tiers payant,tiers-payant,sante,2,ameli.fr
+Arrêt de travail,arret-de-travail,sante,2,ameli.fr
+Feuille de soins,feuille-de-soins,sante,2,ameli.fr
+Posologie,posologie,sante,2,sante.fr
+À jeun,a-jeun,sante,2,sante.fr
+Effet secondaire,effet-secondaire,sante,2,sante.fr
+Consentement,consentement,sante,2,service-public.fr
+Spécialiste,specialiste,sante,2,ameli.fr
+Dépassement d'honoraires,depassement-d-honoraires,sante,2,ameli.fr
+Urgences,urgences,sante,2,sante.fr
+Charges,charges,logement,2,anil.org
+Dépôt de garantie,depot-de-garantie,logement,2,service-public.fr
+État des lieux,etat-des-lieux,logement,2,service-public.fr
+Quittance de loyer,quittance-de-loyer,logement,2,service-public.fr
+Propriétaire,proprietaire,logement,2,anil.org
+Locataire,locataire,logement,2,anil.org
+Assurance habitation,assurance-habitation,logement,2,service-public.fr
+Aide au logement,aide-au-logement,logement,2,caf.fr
+Garant,garant,logement,2,service-public.fr
+Contrat de travail,contrat-de-travail,travail,2,code.travail.gouv.fr
+CDI,cdi,travail,2,code.travail.gouv.fr
+CDD,cdd,travail,2,code.travail.gouv.fr
+Salaire brut,salaire-brut,travail,2,code.travail.gouv.fr
+Salaire net,salaire-net,travail,2,code.travail.gouv.fr
+Période d'essai,periode-d-essai,travail,2,code.travail.gouv.fr
+Démission,demission,travail,2,code.travail.gouv.fr
+Licenciement,licenciement,travail,2,code.travail.gouv.fr
+Employeur,employeur,travail,2,code.travail.gouv.fr
+Allocation chômage,allocation-chomage,travail,2,francetravail.fr
+RQTH,rqth,travail,2,monparcourshandicap.gouv.fr
+Pièce d'identité,piece-d-identite,papiers,2,service-public.fr
+Signature,signature,papiers,2,
+Attestation,attestation,papiers,2,service-public.fr
+Dossier,dossier,papiers,2,
+Photocopie,photocopie,papiers,2,
+Original,original,papiers,2,
+Délai,delai,papiers,2,
+Lettre recommandée,lettre-recommandee,papiers,2,service-public.fr
+Accusé de réception,accuse-de-reception,papiers,2,service-public.fr
+Pièce jointe,piece-jointe,papiers,2,
+Identifiant,identifiant,papiers,2,
+Mot de passe,mot-de-passe,papiers,2,cnil.fr
+Notification,notification,papiers,2,monparcourshandicap.gouv.fr
+Tutelle,tutelle,justice,2,service-public.fr
+Juge,juge,justice,2,justice.fr
+Avocat,avocat,justice,2,justice.fr
+Plainte,plainte,justice,2,service-public.fr
+Convocation,convocation,justice,2,justice.fr
+Mise en demeure,mise-en-demeure,justice,2,service-public.fr
+Amende,amende,justice,2,service-public.fr
+Recours,recours,justice,2,service-public.fr
+Droit,droit,justice,2,
+Témoin,temoin,justice,2,justice.fr
+Procuration,procuration,justice,2,service-public.fr
+Titre de transport,titre-de-transport,transports,2,
+Abonnement,abonnement,transports,2,
+Correspondance,correspondance,transports,2,
+Horaire,horaire,transports,2,
+Retard,retard,transports,2,
+Contrôleur,controleur,transports,2,
+Tarif réduit,tarif-reduit,transports,2,
+Réservation,reservation,transports,2,
+Terminus,terminus,transports,2,
+Quai,quai,transports,2,
+Contrat,contrat,vie-quotidienne,2,economie.gouv.fr (DGCCRF)
+Résiliation,resiliation,vie-quotidienne,2,economie.gouv.fr (DGCCRF)
+Garantie,garantie,vie-quotidienne,2,economie.gouv.fr (DGCCRF)
+Mode d'emploi,mode-d-emploi,vie-quotidienne,2,
+Livraison,livraison,vie-quotidienne,2,economie.gouv.fr (DGCCRF)
+Réclamation,reclamation,vie-quotidienne,2,economie.gouv.fr (DGCCRF)
+Devis,devis,vie-quotidienne,2,economie.gouv.fr (DGCCRF)
+Service client,service-client,vie-quotidienne,2,
+Code confidentiel,code-confidentiel,vie-quotidienne,2,mesquestionsdargent.fr (Banque de France)
+Assurance,assurance,vie-quotidienne,2,service-public.fr
+Date limite,date-limite,vie-quotidienne,2,

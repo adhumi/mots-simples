@@ -1,0 +1,46 @@
+# Fiche modèle. Sert d'exemple de référence dans prompts/generer-fiche.md.
+schema: 1
+mot: Facture
+slug: facture
+prononciation: null        # à remplir seulement si la voix lit mal le mot (sigles) : « a-a-hache »
+theme: argent
+statut: brouillon          # brouillon | relu | valide
+valide_le: null            # date de la séance de validation, quand statut = valide
+
+definition:
+  - Une facture est un document que vous recevez après un achat.
+  - Elle dit ce que vous avez acheté et combien ça coûte.
+  - Souvent, elle dit aussi avant quelle date il faut payer.
+
+exemple: Chaque mois, vous recevez la facture de votre téléphone.
+
+autres_sens: []
+
+a_ne_pas_confondre:
+  mot: devis
+  difference: Le devis annonce le prix avant l'achat. La facture arrive après.
+
+mots_lies:
+  - echeance
+  - prelevement
+  - devis
+
+formes_de_recherche:
+  - factures
+  - facure
+  - fakture
+  - facturation
+
+pictogramme:
+  source: arasaac
+  id: null                 # à choisir dans le catalogue ARASAAC
+  alt: Une feuille avec des lignes et un prix en euros.
+
+source_de_reference:
+  titre: Tout savoir sur la facturation
+  url: https://entreprendre.service-public.gouv.fr/vosdroits/F23208
+  consulte_le: 2026-11-26
+
+notes_de_relecture:
+  - Le mot « document » est-il compris ? Alternative à tester en séance, « un papier ou un message ».
+  - Une facture peut être déjà payée. La définition évite donc « ce que vous devez payer ».

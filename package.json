@@ -1,0 +1,26 @@
+{
+  "name": "mots-simples",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mots simples : un dictionnaire facile à comprendre. Contenu, outils, site et app.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "tsx tools/check-fiches.ts",
+    "test": "tsx --test tools/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "ci": "npm run typecheck && npm test && npm run check"
+  },
+  "dependencies": {
+    "yaml": "^2.6.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
