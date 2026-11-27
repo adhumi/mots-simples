@@ -33,6 +33,38 @@ public enum Jetons {
         }
     }
 
+    /// Couleur et image de chaque thème. Le nom du thème est toujours écrit à côté : jamais la couleur seule.
+    public enum Theme {
+        public static func couleur(_ slug: String) -> Color {
+            switch slug {
+            case "argent": Couleur.dynamique(clair: 0x1F6B45, sombre: 0x7FD6A4)
+            case "sante": Couleur.dynamique(clair: 0xA3324A, sombre: 0xF3A3B4)
+            case "logement": Couleur.dynamique(clair: 0x8A4B10, sombre: 0xF0B987)
+            case "travail": Couleur.dynamique(clair: 0x1D5C96, sombre: 0x9CC8F2)
+            case "papiers": Couleur.dynamique(clair: 0x5B4A9E, sombre: 0xC3B8F5)
+            case "justice": Couleur.dynamique(clair: 0x6B5A12, sombre: 0xE3D184)
+            case "transports": Couleur.dynamique(clair: 0x0F6A70, sombre: 0x86D5DB)
+            case "vie-quotidienne": Couleur.dynamique(clair: 0x8C3A7A, sombre: 0xEBA9DC)
+            default: Couleur.accent
+            }
+        }
+
+        /// Symbole SF du thème.
+        public static func image(_ slug: String) -> String {
+            switch slug {
+            case "argent": "eurosign.circle.fill"
+            case "sante": "cross.case.fill"
+            case "logement": "house.fill"
+            case "travail": "briefcase.fill"
+            case "papiers": "doc.text.fill"
+            case "justice": "building.columns.fill"
+            case "transports": "bus.fill"
+            case "vie-quotidienne": "basket.fill"
+            default: "tag.fill"
+            }
+        }
+    }
+
     public enum Rayon {
         public static let carte: CGFloat = 24
         public static let bouton: CGFloat = 20
@@ -53,6 +85,11 @@ public enum Jetons {
         /// Cible visée pour les actions principales.
         public static let ciblePrincipale: CGFloat = 60
         public static let pictogramme: CGFloat = 140
+        /// Largeur minimale d'une case de la grille des thèmes.
+        public static let caseDeTheme: CGFloat = 150
+        public static let imageDeTheme: CGFloat = 40
+        /// Hauteur maximale du choix du mot, par-dessus la caméra.
+        public static let choixDuMot: CGFloat = 360
         public static let vignette: CGFloat = 52
         public static let bordure: CGFloat = 1
         public static let bordureForte: CGFloat = 2

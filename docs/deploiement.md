@@ -106,3 +106,60 @@ npm run dev --workspace site       # serveur de développement d'Astro
 MODE_CONTENU=public npm run build:site   # le site public : fiches relues et validées seulement
 npm run check:site                 # tous les contrôles automatiques
 ```
+
+---
+
+# Déployer le point de collecte des mots demandés
+
+Ajouté au lot 4. Rien n'est déployé. C'est un deuxième service Railway, dans le même projet que le site.
+Le code est dans `server/`. Voir `server/README.md` pour ce qu'il garde et ce qu'il ne garde pas.
+
+## Stockage et coût
+
+Les compteurs sont dans un seul fichier JSON, `demandes.json`, écrit sur un **volume Railway**.
+C'est le plus simple qui tienne : pas de base de données, et quelques milliers de mots pèsent moins d'un mégaoctet.
+Sans volume, les compteurs seraient perdus à chaque déploiement.
+
+Coût : celui d'un petit service toujours allumé, plus un volume de la plus petite taille.
+Railway facture à l'usage. Je n'ai pas pu vérifier les prix du moment : à regarder dans la grille de Railway avant de créer le service.
+Le service plafonne à 20 000 mots différents, pour que le fichier ne grossisse pas sans fin.
+
+## Variables
+
+| Variable | Valeur | Sens |
+| --- | --- | --- |
+| `JETON_DE_LECTURE` | un long secret, à créer dans Railway | Protège la lecture des compteurs. Sans lui, la lecture est fermée |
+| `ADRESSE_DU_SITE` | `https://motssimples.fr` | Où renvoyer la personne après l'envoi du formulaire |
+| `DOSSIER_DES_DONNEES` | `/donnees`, déjà réglé dans l'image | Où le fichier est écrit |
+| `PORT` | fournie par Railway | Port d'écoute |
+
+Le jeton est un secret : il se crée dans Railway, jamais dans le dépôt.
+Pour en fabriquer un : `openssl rand -base64 32`.
+
+## Étapes
+
+1. Dans le projet Railway, créer un deuxième service à partir du même dépôt.
+2. Fichier de configuration du service : `server/railway.json`. Dossier racine : la racine du dépôt.
+3. Ajouter un volume au service, monté sur `/donnees`.
+4. Définir `JETON_DE_LECTURE` et `ADRESSE_DU_SITE`.
+5. Déployer. Donner un domaine au service, par exemple `demandes.motssimples.fr`, comme pour le site.
+6. Dans le service **du site**, définir `ADRESSE_DES_DEMANDES=https://demandes.motssimples.fr`, puis redéployer le site.
+   La page `/demander` affiche alors son formulaire. Sans cette variable, elle dit que ce n'est pas encore ouvert.
+7. Dans l'app, la même adresse est le réglage `MOTS_SIMPLES_DEMANDES` de `ios/Config/MotsSimples.xcconfig`.
+
+## Vérifier
+
+```
+curl -s https://demandes.motssimples.fr/sante
+curl -s -X POST https://demandes.motssimples.fr/demandes -H 'Content-Type: application/json' -d '{"mot":"essai"}'
+curl -s https://demandes.motssimples.fr/demandes -H "Authorization: Bearer $JETON_DE_LECTURE"
+curl -s "https://demandes.motssimples.fr/demandes?format=csv" -H "Authorization: Bearer $JETON_DE_LECTURE"
+curl -sI -X POST https://demandes.motssimples.fr/demandes | grep -i set-cookie     # rien ne doit sortir
+```
+
+Puis, sur le site : ouvrir `/demander`, envoyer un mot, arriver sur « Merci, le mot est envoyé ».
+
+## Journaux
+
+Le service n'écrit aucun journal de requêtes. Railway, lui, peut garder des journaux d'accès au niveau de son réseau.
+À vérifier dans les réglages du projet, et à dire dans la page « Vie privée » définitive au lot 5.

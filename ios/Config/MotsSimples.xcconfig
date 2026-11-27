@@ -2,5 +2,13 @@
 // Ce fichier ne contient aucun secret. Ni équipe ni signature : c'est à régler dans Xcode.
 
 // YES : build de préversion (simulateur, TestFlight). Les brouillons sont affichés avec leur bandeau.
-// NO  : build public (App Store). Lancer d'abord « npm run embed:content -- --public ».
+// NO  : build public (App Store). L'app refuse alors tout paquet de préversion, embarqué ou téléchargé.
+//       Lancer d'abord « npm run embed:content -- --public ».
 MOTS_SIMPLES_PREVERSION = YES
+
+// L'adresse du site : pages de mots à partager, et paquet de contenu à télécharger sous /contenu/v1/.
+// Dans un fichier xcconfig, « // » ouvre un commentaire : « /$()/ » écrit les deux barres de l'adresse.
+MOTS_SIMPLES_SITE = https:/$()/motssimples.fr
+
+// L'adresse du point de collecte des mots demandés. Vide : le bouton « Demander ce mot » n'apparaît pas.
+MOTS_SIMPLES_DEMANDES = https:/$()/demandes.motssimples.fr

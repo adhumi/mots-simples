@@ -8,6 +8,7 @@ export function GET({ site }: { site: URL | undefined }): Response {
     "/mots",
     ...themes.map((t) => `/theme/${t.slug}`),
     ...fiches.map((f) => `/mot/${f.slug}`),
+    "/demander",
     "/a-propos",
     "/vie-privee",
     "/accessibilite",

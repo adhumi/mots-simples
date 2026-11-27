@@ -92,3 +92,22 @@ struct RechercheTests {
         #expect(dictionnaire.ficheExacte(pour: "fact") == nil)
     }
 }
+
+@Suite("Performance de la recherche")
+struct PerformanceDeLaRechercheTests {
+    /// Budget des specs : moins de 50 millisecondes après une lettre tapée.
+    /// Ici : 2 000 fiches, dix fois plus que la V1, et la moyenne de 50 recherches.
+    @Test("Une recherche dans 2 000 fiches prend moins de 50 millisecondes")
+    func budget() {
+        let fiches = (0..<2000).map { n in
+            ficheDeTest("Mot numéro \(n) facture", slug: "mot-\(n)", formes: ["forme \(n)", "variante \(n)", "factures \(n)"])
+        }
+        let index = IndexDeRecherche(fiches: fiches)
+        let horloge = ContinuousClock()
+        let requetes = ["fa", "fac", "fact", "factr", "factur", "mot numero 19", "variante", "xyz", "forme 12", "numéro"]
+        let duree = horloge.measure {
+            for tour in 0..<50 { _ = index.chercher(requetes[tour % requetes.count]) }
+        }
+        #expect(duree / 50 < .milliseconds(50), "Moyenne : \(duree / 50)")
+    }
+}

@@ -2,8 +2,9 @@
 
 Swift 6, SwiftUI, iOS 26 au minimum, iPhone et iPad. Aucune dépendance tierce.
 
-**Important : ce code a été écrit sans Xcode ni compilateur Swift.**
-Il n'a jamais été compilé. Voir `docs/rapports/lot-2.md` pour ce que cela implique.
+**Ce code a été écrit sans Xcode ni compilateur Swift.**
+Depuis, GitHub Actions le compile et lance ses tests sur macOS : voir `.github/workflows/ios.yml`.
+Il n'a pas encore été essayé à la main sur un simulateur ou un téléphone. Voir `docs/rapports/lot-2.md` et `docs/rapports/lot-4.md` pour ce que cela implique. La marche vers TestFlight est dans `docs/testflight.md`.
 
 ## Structure
 
@@ -11,9 +12,9 @@ Il n'a jamais été compilé. Voir `docs/rapports/lot-2.md` pour ce que cela imp
 | --- | --- |
 | `Packages/DictionaryCore` | Modèle, chargement vérifié du paquet, recherche, derniers mots. Testé avec Swift Testing |
 | `Packages/DictionaryUI` | Écrans SwiftUI, écoute, jetons de style, police Lexend, catalogue de chaînes |
-| `MotsSimples/` | La cible d'app : point d'entrée, ressources, contenu embarqué |
-| `MotsSimplesUITests/` | Tests d'interface : audit d'accessibilité automatique |
-| `Config/` | `Info.plist` et réglages de compilation |
+| `MotsSimples/` | La cible d'app : point d'entrée, « Expliquer un mot » pour Siri, manifeste de confidentialité, contenu embarqué |
+| `MotsSimplesUITests/` | Tests d'interface sur chaque écran, captures, mesures de performance. L'audit d'accessibilité automatique est désactivé dans `Audit.swift` |
+| `Config/` | `Info.plist`, droits de l'app et réglages de compilation |
 
 ## Embarquer le contenu
 
@@ -29,6 +30,16 @@ npm run embed:content -- --check    # vérifie que la copie est à jour (lancé 
 La commande copie aussi le paquet et le corpus de recherche dans les tests de `DictionaryCore`.
 
 L'app se lance sans réseau dès la première ouverture : le paquet est dans l'app.
+
+## Réglages de compilation
+
+Tous dans `Config/MotsSimples.xcconfig`. Aucun secret.
+
+| Réglage | Sens |
+| --- | --- |
+| `MOTS_SIMPLES_PREVERSION` | `YES` : brouillons visibles. `NO` : build public, tout paquet de préversion est refusé |
+| `MOTS_SIMPLES_SITE` | Adresse du site : pages à partager et paquet de contenu sous `/contenu/v1/` |
+| `MOTS_SIMPLES_DEMANDES` | Adresse du point de collecte. Vide : pas de bouton « Demander ce mot » |
 
 ## Préversion ou public
 

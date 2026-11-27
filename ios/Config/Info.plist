@@ -10,7 +10,21 @@
 	<array>
 		<string>fr</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>MotsSimplesPreversion</key>
 	<string>$(MOTS_SIMPLES_PREVERSION)</string>
+	<key>MotsSimplesSite</key>
+	<string>$(MOTS_SIMPLES_SITE)</string>
+	<key>MotsSimplesDemandes</key>
+	<string>$(MOTS_SIMPLES_DEMANDES)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>La caméra sert à lire un mot sur un papier. Aucune photo n'est gardée.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Le micro sert à écouter le mot que vous dites, pour le chercher.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>L'app change votre voix en texte pour chercher le mot. Rien n'est gardé.</string>
+	<key>UISupportsAssistiveAccess</key>
+	<true/>
 </dict>
 </plist>

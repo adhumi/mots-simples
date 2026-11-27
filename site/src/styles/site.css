@@ -508,6 +508,22 @@ section.carte > :last-child {
   display: none !important;
 }
 
+.rappel {
+  display: flex;
+  gap: var(--espace-s);
+  align-items: flex-start;
+  font-weight: 600;
+}
+
+.rappel .icone {
+  margin-top: 0.2rem;
+  color: var(--accent);
+}
+
+.formulaire .champ {
+  margin-bottom: var(--espace-m);
+}
+
 .suite {
   margin-top: var(--espace-l);
 }

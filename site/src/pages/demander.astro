@@ -1,0 +1,43 @@
+---
+// Demander un mot : un champ, un bouton. Le formulaire marche sans JavaScript.
+// Il envoie le mot, et rien d'autre, au point de collecte (server/).
+import Icone from "../components/Icone.astro";
+import Page from "../layouts/Page.astro";
+import { adresseDesDemandes } from "../lib/reglages.ts";
+import { textes } from "../lib/textes.ts";
+
+const action = adresseDesDemandes ? `${adresseDesDemandes.replace(/\/+$/, "")}/demandes` : "";
+---
+
+<Page titre={`${textes.demanderUnMot} | ${textes.nomDuSite}`} description={textes.demanderExplication}>
+  <h1>{textes.demanderUnMot}</h1>
+  {
+    action ? (
+      <>
+        <p>{textes.demanderExplication}</p>
+        <form class="formulaire" method="post" action={action}>
+          <label for="mot">
+            <strong>{textes.demanderLeMot}</strong>
+          </label>
+          <p class="rappel" id="rappel">
+            <Icone nom="attention" />
+            <span>{textes.demanderRappel}</span>
+          </p>
+          <div class="champ">
+            <input id="mot" name="mot" type="text" required minlength="2" maxlength="40" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="rappel" />
+          </div>
+          <button class="bouton principal" type="submit">
+            <Icone nom="envoyer" />
+            <span>{textes.demanderEnvoyer}</span>
+          </button>
+        </form>
+        <p class="message suite">{textes.demanderCeQuiPart}</p>
+        <script>
+          import "../scripts/demander.ts";
+        </script>
+      </>
+    ) : (
+      <p class="carte">{textes.demanderFerme}</p>
+    )
+  }
+</Page>
