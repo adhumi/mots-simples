@@ -1,0 +1,48 @@
+schema: 1
+mot: AAH
+slug: aah
+prononciation: a-a-hache
+theme: argent
+statut: brouillon
+valide_le: null
+
+definition:
+  - L'AAH est une aide en argent pour les adultes en situation de handicap.
+  - Vous la recevez chaque mois si vous y avez droit.
+  - Elle vous aide à payer ce dont vous avez besoin pour vivre.
+
+exemple: Vous demandez l'AAH en envoyant un dossier à la MDPH.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - mdph
+  - allocation
+  - pch
+  - dossier
+
+formes_de_recherche:
+  - allocation aux adultes handicapés
+  - allocation adulte handicapé
+  - allocation adultes handicapés
+  - A.A.H.
+  - aha
+  - allocation handicap
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une personne adulte qui reçoit de l'argent chaque mois.
+
+source_de_reference:
+  titre: monparcourshandicap.gouv.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur monparcourshandicap.gouv.fr.
+  - Mot sensible. « Si vous y avez droit » renvoie aux conditions sans les donner, comme le veut la règle.
+  - La fiche ne dit pas qui verse l'aide. À ajouter ou non après lecture de la source.
+  - Prononciation « a-a-hache » à écouter avec la voix du téléphone.

@@ -1,0 +1,49 @@
+schema: 1
+mot: MDPH
+slug: mdph
+prononciation: èm-dé-pé-hache
+theme: papiers
+statut: brouillon
+valide_le: null
+
+definition:
+  - La MDPH est un lieu qui informe et aide les personnes en situation de handicap.
+  - Il y en a une dans chaque département.
+  - Vous lui envoyez vos demandes d'aides liées au handicap.
+
+exemple: Vous déposez votre dossier à la MDPH de votre département.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - aah
+  - rqth
+  - esat
+  - dossier
+
+formes_de_recherche:
+  - maison départementale des personnes handicapées
+  - maison départementale du handicap
+  - maison du handicap
+  - M.D.P.H.
+  - mdhp
+  - mpdh
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Un bâtiment d'accueil avec une personne qui renseigne une autre personne.
+
+source_de_reference:
+  titre: monparcourshandicap.gouv.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur monparcourshandicap.gouv.fr.
+  - Mot sensible. La première phrase fait 15 mots, la limite.
+  - Dans certains départements, ce lieu porte un autre nom. À vérifier contre la source.
+  - « Département » est-il compris ? Pas de fiche prévue pour ce mot.
+  - Prononciation « èm-dé-pé-hache » à écouter avec la voix du téléphone.

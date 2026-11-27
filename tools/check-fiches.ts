@@ -225,6 +225,19 @@ export function controlerFiche(donnees: unknown, nomFichier: string, ctx: Contex
     });
   }
 
+  // Une source citée sans adresse doit être expliquée : la règle « n'invente jamais une source ».
+  if (
+    fiche.source_de_reference &&
+    !fiche.source_de_reference.url &&
+    !fiche.notes_de_relecture.some((n) => normaliser(n).includes("source"))
+  ) {
+    problemes.push({
+      niveau: "erreur",
+      regle: "source-sans-note",
+      message: "source sans adresse : une note de relecture doit dire que la source n'a pas été ouverte",
+    });
+  }
+
   return problemes;
 }
 

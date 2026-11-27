@@ -1,0 +1,51 @@
+schema: 1
+mot: ESAT
+slug: esat
+prononciation: ésate
+theme: travail
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un ESAT est un lieu de travail pour des adultes en situation de handicap.
+  - Vous y travaillez avec des professionnels qui vous accompagnent.
+  - Vous recevez de l'argent chaque mois pour votre travail.
+
+exemple: Lina travaille à l'ESAT, dans l'équipe des espaces verts.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - mdph
+  - rqth
+  - aah
+  - employeur
+
+formes_de_recherche:
+  - établissement et service d'accompagnement par le travail
+  - établissement et service d'aide par le travail
+  - E.S.A.T.
+  - ésat
+  - esate
+  - essat
+  - CAT
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Des personnes travaillent ensemble dans un atelier.
+
+source_de_reference:
+  titre: monparcourshandicap.gouv.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur monparcourshandicap.gouv.fr.
+  - Mot sensible. La fiche présente l'ESAT comme un lieu de travail, sans parler de capacité.
+  - Le nom développé a changé. Les deux formes sont dans les formes de recherche. À vérifier contre la source.
+  - « Professionnels » est-il compris ? Alternative, « des personnes dont c'est le métier ».
+  - La fiche ne dit pas comment on entre en ESAT. C'est une règle, pas le sens du mot.
+  - Prononciation « ésate » à écouter avec la voix du téléphone.

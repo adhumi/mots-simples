@@ -1,0 +1,44 @@
+schema: 1
+mot: Rendez-vous
+slug: rendez-vous
+prononciation: null
+theme: vie-quotidienne
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un rendez-vous est une rencontre prévue à un jour et à une heure précis.
+  - Vous le prenez à l'avance, par téléphone, sur internet ou sur place.
+
+exemple: Vous avez rendez-vous chez le dentiste mardi matin.
+
+autres_sens: []
+
+a_ne_pas_confondre:
+  mot: convocation
+  difference: Une convocation est obligatoire. Vous ne choisissez pas la date.
+
+mots_lies:
+  - horaire
+  - convocation
+  - retard
+  - reservation
+
+formes_de_recherche:
+  - rendez vous
+  - rendévous
+  - randez-vous
+  - rendez-vou
+  - RDV
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Un calendrier, une horloge et deux personnes qui se rencontrent.
+
+source_de_reference: null
+
+notes_de_relecture:
+  - Mot courant, sans source.
+  - « Rencontre » convient mal à un rendez-vous par téléphone. À tester en séance.
+  - La différence avec « convocation » est-elle utile ici ?

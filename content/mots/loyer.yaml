@@ -1,0 +1,49 @@
+schema: 1
+mot: Loyer
+slug: loyer
+prononciation: null
+theme: logement
+statut: brouillon
+valide_le: null
+
+definition:
+  - Le loyer est l'argent que vous payez pour habiter un logement.
+  - Vous le payez au propriétaire, le plus souvent chaque mois.
+  - Son montant est écrit dans le bail.
+
+exemple: Vous payez votre loyer au début du mois.
+
+autres_sens: []
+
+a_ne_pas_confondre:
+  mot: charges
+  difference: Les charges paient par exemple l'eau ou l'entretien de l'immeuble. Elles s'ajoutent au loyer.
+
+mots_lies:
+  - bail
+  - charges
+  - quittance-de-loyer
+  - proprietaire
+
+formes_de_recherche:
+  - loyers
+  - loyé
+  - loier
+  - loiyer
+  - loyer mensuel
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une maison et des billets donnés à une autre personne.
+
+source_de_reference:
+  titre: service-public.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur service-public.fr.
+  - Le mot « montant » est-il compris ? Alternative, « Le bail dit combien vous payez ».
+  - « Bail » est difficile. Il a sa fiche et il est lié.
+  - On paie aussi un loyer pour un garage ou une voiture. Sens écarté.
