@@ -115,3 +115,11 @@ test("refuse un champ inconnu et un statut incohérent", () => {
 test("refuse un fichier mal nommé", () => {
   assert.ok(regles(modele(), "factures.yaml").includes("nom-de-fichier"));
 });
+
+test("refuse une source sans adresse quand aucune note ne l'explique", () => {
+  const f = modele();
+  f.source_de_reference = { titre: "service-public.fr", url: null, consulte_le: "2026-11-27" };
+  assert.ok(regles(f).includes("source-sans-note"));
+  f.notes_de_relecture = ["Source non ouverte, faute d'accès au web."];
+  assert.ok(!regles(f).includes("source-sans-note"));
+});
