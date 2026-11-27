@@ -1,0 +1,46 @@
+schema: 1
+mot: RIB
+slug: rib
+prononciation: rib
+theme: argent
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un RIB est un document donné par votre banque.
+  - Il porte votre nom et le numéro de votre compte.
+  - Vous le donnez pour recevoir de l'argent ou pour payer par prélèvement.
+
+exemple: Votre employeur vous demande un RIB pour verser votre salaire.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - prelevement
+  - virement
+  - releve-de-compte
+
+formes_de_recherche:
+  - relevé d'identité bancaire
+  - R.I.B.
+  - ribs
+  - ribe
+  - IBAN
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une feuille de banque avec un nom et un long numéro.
+
+source_de_reference:
+  titre: mesquestionsdargent.fr (Banque de France), page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur mesquestionsdargent.fr.
+  - « Le numéro de votre compte » remplace IBAN, jugé trop difficile. IBAN est dans les formes de recherche.
+  - La troisième phrase porte deux usages. À couper si elle est mal comprise en séance.
+  - Le mot « prélèvement » est difficile. Il a sa fiche et il est lié.
