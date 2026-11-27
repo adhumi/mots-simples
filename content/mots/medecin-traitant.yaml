@@ -1,0 +1,50 @@
+schema: 1
+mot: Médecin traitant
+slug: medecin-traitant
+prononciation: null
+theme: sante
+statut: brouillon
+valide_le: null
+
+definition:
+  - Le médecin traitant est le médecin que vous choisissez pour vous suivre.
+  - Vous allez le voir en premier quand vous êtes malade.
+  - Il connaît votre santé et vous envoie vers d'autres médecins si besoin.
+
+exemple: Vous prenez rendez-vous avec votre médecin traitant pour renouveler votre ordonnance.
+
+autres_sens: []
+
+a_ne_pas_confondre:
+  mot: specialiste
+  difference: Le spécialiste soigne une seule partie du corps ou un seul type de maladie.
+
+mots_lies:
+  - ordonnance
+  - carte-vitale
+  - specialiste
+  - rendez-vous
+
+formes_de_recherche:
+  - médecins traitants
+  - médecin traitent
+  - medecin trétant
+  - docteur traitant
+  - médecin de famille
+  - médecin généraliste
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Un médecin assis à son bureau, en face d'une personne.
+
+source_de_reference:
+  titre: ameli.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur ameli.fr.
+  - Le mot « médecin » revient dans la définition. La consigne interdit les synonymes, donc pas de « docteur ».
+  - « Vous suivre » est-il compris ? Alternative, « pour s'occuper de votre santé ».
+  - La fiche ne parle pas du remboursement lié au choix de ce médecin. C'est une règle, pas le sens du mot.
