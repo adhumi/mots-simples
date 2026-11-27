@@ -1,0 +1,49 @@
+schema: 1
+mot: Carte Vitale
+slug: carte-vitale
+prononciation: null
+theme: sante
+statut: brouillon
+valide_le: null
+
+definition:
+  - La carte Vitale est la carte verte que vous montrez pour vos soins.
+  - Elle montre que la Sécurité sociale paie une partie de vos soins.
+  - Grâce à elle, le remboursement arrive plus vite et sans papier à envoyer.
+
+exemple: À la pharmacie, vous donnez votre carte Vitale avec votre ordonnance.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - mutuelle
+  - ordonnance
+  - medecin-traitant
+  - feuille-de-soins
+
+formes_de_recherche:
+  - cartes Vitale
+  - carte vital
+  - carte vitalle
+  - vitale
+  - carte verte
+  - carte de sécurité sociale
+  - carte de sécu
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une carte verte avec une photo et une puce dorée.
+
+source_de_reference:
+  titre: ameli.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur ameli.fr.
+  - Le mot « carte » revient dans la première phrase. Difficile à éviter pour une expression.
+  - La carte existe aussi dans une application sur téléphone. La fiche n'en parle pas.
+  - « Remboursement » a sa fiche dans la liste, mais « mots_lies » est déjà plein. À arbitrer.
