@@ -4,6 +4,7 @@ import SwiftUI
 /// Accueil : chercher un mot. L'app s'ouvre ici, sans rien demander.
 struct AccueilView: View {
     @Environment(Bibliotheque.self) private var bibliotheque
+    @Environment(Aiguillage.self) private var aiguillage
     @State private var requete = ""
     @FocusState private var champActif: Bool
 
@@ -33,6 +34,23 @@ struct AccueilView: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .background(Jetons.Couleur.fond)
+        // Bouton flottant, en verre : le seul chemin vers les thèmes. Pas de barre d'onglets.
+        .safeAreaInset(edge: .bottom) {
+            if !champActif && !bibliotheque.dictionnaire.fiches.isEmpty {
+                Button {
+                    aiguillage.allerA(.themes)
+                } label: {
+                    Label(Textes.voirLesThemes, systemImage: "square.grid.2x2.fill")
+                        .police(.corpsFort)
+                        .frame(maxWidth: .infinity, minHeight: Jetons.Taille.ciblePrincipale)
+                }
+                .boutonFlottant()
+                .frame(maxWidth: Jetons.Taille.largeurDeLecture)
+                .padding(.horizontal, Jetons.Espace.m)
+                .padding(.bottom, Jetons.Espace.s)
+                .accessibilityIdentifier("voir-les-themes")
+            }
+        }
         .navigationTitle(Textes.nomDeLApp)
         .navigationBarTitleDisplayMode(.inline)
     }

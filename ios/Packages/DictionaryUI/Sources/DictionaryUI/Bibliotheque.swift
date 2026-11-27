@@ -43,5 +43,37 @@ public final class Bibliotheque {
 
 /// Les écrans vers lesquels on navigue depuis l'accueil.
 public enum Destination: Hashable, Sendable {
+    /// La fiche d'un mot, par son slug.
     case fiche(String)
+    /// La grille des huit thèmes.
+    case themes
+    /// Les mots d'un thème, par son slug.
+    case theme(String)
+}
+
+/// L'état de la navigation. Il est partagé pour que Siri, Spotlight et les liens puissent ouvrir une fiche.
+@MainActor
+@Observable
+public final class Aiguillage {
+    /// Les écrans empilés au-dessus de l'accueil.
+    public var chemin: [Destination] = []
+
+    public init() {}
+
+    /// L'aiguillage de l'app. Les intégrations système écrivent dedans.
+    public static let partage = Aiguillage()
+
+    /// Ajoute un écran au-dessus de l'écran courant.
+    public func allerA(_ destination: Destination) {
+        chemin.append(destination)
+    }
+
+    /// Ouvre un écran directement au-dessus de l'accueil. « Retour » ramène alors à l'accueil.
+    public func ouvrir(_ destination: Destination) {
+        chemin = [destination]
+    }
+
+    public func retourALAccueil() {
+        chemin = []
+    }
 }

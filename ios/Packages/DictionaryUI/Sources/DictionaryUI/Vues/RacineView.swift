@@ -5,25 +5,31 @@ import SwiftUI
 public struct RacineView: View {
     private let bibliotheque: Bibliotheque
     @State private var lecteur = LecteurVocal()
-    @State private var chemin: [Destination] = []
+    @Bindable private var aiguillage: Aiguillage
 
-    public init(bibliotheque: Bibliotheque) {
+    public init(bibliotheque: Bibliotheque, aiguillage: Aiguillage = .partage) {
         self.bibliotheque = bibliotheque
+        self.aiguillage = aiguillage
         Polices.enregistrer()
     }
 
     public var body: some View {
-        NavigationStack(path: $chemin) {
+        NavigationStack(path: $aiguillage.chemin) {
             AccueilView()
                 .navigationDestination(for: Destination.self) { destination in
                     switch destination {
                     case .fiche(let slug):
                         FicheView(slug: slug)
+                    case .themes:
+                        ThemesView()
+                    case .theme(let slug):
+                        ThemeView(slug: slug)
                     }
                 }
         }
         .environment(bibliotheque)
         .environment(lecteur)
+        .environment(aiguillage)
         .tint(Jetons.Couleur.accent)
     }
 }

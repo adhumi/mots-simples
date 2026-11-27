@@ -15,6 +15,15 @@ public enum Textes {
     public static var resultats: String { String(localized: "Résultats", bundle: .module) }
     public static var dictionnaireVide: String { String(localized: "Le dictionnaire est vide pour le moment.", bundle: .module) }
 
+    // Thèmes
+    public static var voirLesThemes: String { String(localized: "Voir les thèmes", bundle: .module) }
+    public static var lesThemes: String { String(localized: "Les thèmes", bundle: .module) }
+    public static var choisissezUnTheme: String { String(localized: "Choisissez un thème.", bundle: .module) }
+    public static var aucunMotDansLeTheme: String { String(localized: "Il n'y a pas encore de mot dans ce thème.", bundle: .module) }
+    public static func nombreDeMots(_ nombre: Int) -> String {
+        nombre == 1 ? String(localized: "1 mot", bundle: .module) : String(localized: "\(nombre) mots", bundle: .module)
+    }
+
     // Mot absent
     public static var motAbsent: String { String(localized: "Ce mot n'est pas encore dans le dictionnaire.", bundle: .module) }
     public static var motsProches: String { String(localized: "Mots proches", bundle: .module) }
