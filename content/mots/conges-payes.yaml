@@ -1,0 +1,51 @@
+schema: 1
+mot: Congés payés
+slug: conges-payes
+prononciation: null
+theme: travail
+statut: brouillon
+valide_le: null
+
+definition:
+  - Les congés payés sont des jours de repos où vous recevez votre salaire.
+  - Vous y avez droit quand vous travaillez pour un employeur.
+  - Votre employeur doit donner son accord sur les dates.
+
+exemple: Vous prenez vos congés payés en août pour partir en vacances.
+
+autres_sens: []
+
+a_ne_pas_confondre:
+  mot: arret-de-travail
+  difference: L'arrêt de travail est donné par un médecin quand vous êtes malade.
+
+mots_lies:
+  - employeur
+  - fiche-de-paie
+  - contrat-de-travail
+  - arret-de-travail
+
+formes_de_recherche:
+  - congé payé
+  - congés payé
+  - conger payer
+  - congés
+  - congé
+  - vacances
+  - CP
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une personne se repose sur une chaise longue, à côté d'un calendrier.
+
+source_de_reference:
+  titre: code.travail.gouv.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur code.travail.gouv.fr.
+  - Le nombre de jours n'est pas donné, c'est voulu.
+  - « Donner son accord sur les dates » simplifie la règle. À vérifier contre la source.
+  - Le mot est au pluriel, comme dans l'usage. La règle du singulier ne s'applique pas bien ici.
