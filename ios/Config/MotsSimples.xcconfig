@@ -1,0 +1,6 @@
+// Réglages de compilation de « Mots simples ».
+// Ce fichier ne contient aucun secret. Ni équipe ni signature : c'est à régler dans Xcode.
+
+// YES : build de préversion (simulateur, TestFlight). Les brouillons sont affichés avec leur bandeau.
+// NO  : build public (App Store). Lancer d'abord « npm run embed:content -- --public ».
+MOTS_SIMPLES_PREVERSION = YES
