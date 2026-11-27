@@ -31,7 +31,7 @@ Elle est testée ici, sur le même corpus de requêtes que la version Swift.
 ## Ce qui est écrit sans être compilé
 
 - **`ios/Packages/DictionaryCore`** : modèle `Codable`, chargement avec contrôle du schéma, de la taille et de l'empreinte SHA-256,
-  recherche, derniers mots. 25 tests Swift Testing, dont le corpus de requêtes.
+  recherche, derniers mots. 23 tests Swift Testing, dont le corpus de requêtes.
 - **`ios/Packages/DictionaryUI`** : accueil, résultats, mot absent, fiche, écoute, jetons de style, police, catalogue de chaînes.
 - **`ios/MotsSimples`** : la cible d'app. **`ios/MotsSimplesUITests`** : 6 tests d'interface, dont l'audit d'accessibilité
   sur l'accueil, sur une fiche, et à la plus grande taille de texte.
