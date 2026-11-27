@@ -33,7 +33,14 @@ function construire(mode, sortie) {
   execFileSync("npx", ["astro", "build", "--silent"], {
     cwd: site,
     stdio: ["ignore", "ignore", "inherit"],
-    env: { ...process.env, MODE_CONTENU: mode, INDEXATION: "fermee", DOSSIER_DE_SORTIE: sortie },
+    // Le mode public est construit sans point de collecte, la préversion avec : les deux formes de /demander sont contrôlées.
+    env: {
+      ...process.env,
+      MODE_CONTENU: mode,
+      INDEXATION: "fermee",
+      DOSSIER_DE_SORTIE: sortie,
+      ADRESSE_DES_DEMANDES: mode === "preversion" ? "https://demandes.exemple.test" : "",
+    },
   });
 }
 
@@ -181,6 +188,10 @@ async function controlerLeServeur(base) {
     ["/robots.txt", 200],
     ["/.well-known/apple-app-site-association", 200],
     ["/polices/lexend-latin.woff2", 200],
+    ["/demander", 200],
+    ["/demander/merci", 200],
+    ["/demander/erreur", 200],
+    ["/demander/plus-tard", 200],
     ["/mot/facture.html", 301],
     ["/mots/", 301],
     ["/mot/mot-qui-n-existe-pas", 404],
@@ -218,7 +229,7 @@ async function controlerDansLeNavigateur(base) {
   const { chromium } = require("playwright");
   const axe = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
   const navigateur = await chromium.launch();
-  const pages = ["/", "/mot/facture", "/mot/preavis", "/theme/argent", "/mots", "/a-propos"];
+  const pages = ["/", "/mot/facture", "/mot/preavis", "/theme/argent", "/mots", "/a-propos", "/demander", "/demander/merci"];
   try {
     for (const theme of ["light", "dark"]) {
       // bypassCSP : la politique de sécurité du site bloque, à raison, le script d'audit injecté.
@@ -284,6 +295,13 @@ async function controlerDansLeNavigateur(base) {
     await resultat.waitFor({ state: "visible" });
     await champ.fill("girafe");
     await page.locator("[data-absent]").waitFor({ state: "visible" });
+    // « Demander ce mot » emmène le mot vers la page de demande, qui le recopie dans son champ.
+    await page.locator("[data-demander]").click();
+    await page.waitForURL(base + "/demander?mot=girafe");
+    if ((await page.locator("#mot").inputValue()) !== "girafe") erreur("demander : le mot cherché n'est pas recopié dans le champ");
+    if ((await page.locator("form.formulaire").getAttribute("action")) !== "https://demandes.exemple.test/demandes") erreur("demander : le formulaire ne vise pas le point de collecte");
+    await page.goto(base + "/");
+    await champ.waitFor({ state: "visible" });
     await champ.fill("rdv");
     await champ.press("Enter");
     await page.keyboard.press("Enter");

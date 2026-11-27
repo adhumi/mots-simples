@@ -56,6 +56,24 @@ export const textes = {
   valide: "Validé",
   valideLe: (date: string) => `Validé le ${date}`,
 
+  // Demander un mot
+  demanderCeMot: "Demander ce mot",
+  demanderExplication: "Un mot manque dans le dictionnaire ? Écrivez-le ici.",
+  demanderLeMot: "Le mot que vous voulez",
+  demanderRappel: "Écrivez seulement le mot. N'écrivez pas votre nom. N'écrivez rien de personnel.",
+  demanderEnvoyer: "Envoyer le mot",
+  demanderCeQuiPart: "Seul le mot est envoyé. Nous ne savons pas qui vous êtes.",
+  demanderFerme: "On ne peut pas encore demander un mot ici. Cela arrive bientôt.",
+  merciTitre: "Merci, le mot est envoyé",
+  merciExplication: "Nous regardons les mots les plus demandés pour écrire les prochaines fiches.",
+  merciSansReponse: "Vous ne recevrez pas de réponse, car nous ne savons pas qui vous êtes.",
+  erreurTitre: "Le mot n'est pas parti",
+  erreurExplication: "Écrivez un seul mot ou une expression courte, avec des lettres seulement. Pas de chiffre.",
+  plusTardTitre: "Réessayez un peu plus tard",
+  plusTardExplication: "Il y a trop de demandes en ce moment. Le mot n'est pas parti.",
+  recommencer: "Demander un autre mot",
+  reessayer: "Réessayer",
+
   // Pages provisoires
   texteProvisoire: "Texte provisoire. Il sera complété avant l'ouverture du site.",
 

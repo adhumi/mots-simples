@@ -1,0 +1,24 @@
+---
+// Page de retour après l'envoi d'un mot depuis le formulaire, sans JavaScript.
+import Icone from "../../components/Icone.astro";
+import Page from "../../layouts/Page.astro";
+import { textes } from "../../lib/textes.ts";
+---
+
+<Page titre={`${textes.merciTitre} | ${textes.nomDuSite}`} description={textes.merciExplication}>
+  <h1>{textes.merciTitre}</h1>
+  <p>{textes.merciExplication}</p>
+  <p>{textes.merciSansReponse}</p>
+  <p class="suite">
+    <a class="bouton" href="/demander">
+      <Icone nom="envoyer" />
+      <span>{textes.recommencer}</span>
+    </a>
+  </p>
+  <p>
+    <a class="bouton" href="/">
+      <Icone nom="maison" />
+      <span>{textes.retourAccueil}</span>
+    </a>
+  </p>
+</Page>

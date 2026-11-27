@@ -33,6 +33,9 @@ if (formulaire && zone && liste && absent && champ) {
         return li;
       }),
     );
+    // « Demander ce mot » emmène le mot cherché vers la page de demande. Il reste dans le navigateur.
+    const demander = absent.querySelector<HTMLAnchorElement>("[data-demander]");
+    if (demander) demander.href = `/demander?mot=${encodeURIComponent(requete.trim())}`;
     liste.hidden = resultats.length === 0;
     absent.hidden = resultats.length > 0;
     zone.hidden = false;
