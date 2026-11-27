@@ -1,12 +1,16 @@
 import SwiftUI
 
-/// Petit bouton d'écoute : une image et un mot. Devient « Arrêter » pendant sa lecture.
+/// Petit bouton d'écoute. Dans les blocs de la fiche et dans les listes, il montre l'image seule,
+/// pour ne pas charger l'écran : c'est une décision d'Adrien, et une exception au principe « une image et un mot ».
+/// Le haut-parleur devient un carré d'arrêt pendant la lecture. VoiceOver et le contrôle vocal gardent un nom complet.
 struct BoutonEcoute: View {
     /// Identifiant de la lecture, unique dans l'écran.
     let lecture: String
     let enonces: [Enonce]
     /// Ce que VoiceOver annonce : « Écouter le mot facture », « Écouter : Définition ».
     let libelleAccessible: String
+    /// Vrai pour écrire aussi « Écouter » à côté de l'image, quand le bouton est seul et sans titre voisin.
+    var avecTexte = false
 
     @Environment(LecteurVocal.self) private var lecteur
 
@@ -15,14 +19,20 @@ struct BoutonEcoute: View {
         Button {
             lecteur.basculer(lecture, enonces: enonces)
         } label: {
-            Label(enCours ? Textes.arreter : Textes.ecouter, systemImage: enCours ? "stop.fill" : "speaker.wave.2.fill")
-                .police(.note)
-                .cibleMinimale()
+            let etiquette = Label(enCours ? Textes.arreter : Textes.ecouter, systemImage: enCours ? "stop.fill" : "speaker.wave.2.fill")
+                .police(avecTexte ? .note : .sousTitre)
+            if avecTexte {
+                etiquette.cibleMinimale()
+            } else {
+                etiquette.labelStyle(.iconOnly).cibleMinimale()
+            }
         }
         .buttonStyle(.bordered)
-        .buttonBorderShape(.capsule)
+        .buttonBorderShape(avecTexte ? .capsule : .circle)
         .tint(Jetons.Couleur.accent)
         .accessibilityLabel(enCours ? Textes.arreter : libelleAccessible)
+        // Le contrôle vocal comprend « Toucher Écouter », même sans texte à l'écran.
+        .accessibilityInputLabels([enCours ? Textes.arreter : Textes.ecouter, libelleAccessible])
         .accessibilityIdentifier("ecouter-\(lecture)")
     }
 }
