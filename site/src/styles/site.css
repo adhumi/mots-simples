@@ -1,0 +1,513 @@
+/* Mots simples : style doux et coloré. Mêmes jetons que l'app iOS (DictionaryUI/Style/Jetons.swift). */
+
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/polices/lexend-latin.woff2") format("woff2");
+}
+
+:root {
+  color-scheme: light dark;
+  --fond: #eef6f0;
+  --carte: #ffffff;
+  --bordure: #c9ddd0;
+  --bordure-forte: #4f6b5a;
+  --accent: #1f6b45;
+  --sur-accent: #ffffff;
+  --texte: #15231b;
+  --texte-secondaire: #44584c;
+  --surlignage: #ffe9a8;
+  --alerte-fond: #fff1d6;
+  --alerte-texte: #5f3b00;
+  --image-neutre: #ddede2;
+  --rayon-carte: 1.5rem;
+  --rayon-bouton: 1.25rem;
+  --rayon-petit: 0.75rem;
+  --espace-s: 0.5rem;
+  --espace-m: 1rem;
+  --espace-l: 1.5rem;
+  --espace-xl: 2rem;
+  --largeur: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #0f1a14;
+    --carte: #1b2a22;
+    --bordure: #35493e;
+    --bordure-forte: #a9c4b4;
+    --accent: #7fd6a4;
+    --sur-accent: #0b1f14;
+    --texte: #f1f7f3;
+    --texte-secondaire: #b9ccbf;
+    --surlignage: #5c4a00;
+    --alerte-fond: #4a3200;
+    --alerte-texte: #ffdfa3;
+    --image-neutre: #26392f;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --bordure: var(--bordure-forte);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+main,
+.entete,
+.pied {
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding-inline: var(--espace-m);
+}
+
+main {
+  padding-block: var(--espace-l) var(--espace-xl);
+}
+
+main:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.125rem;
+  margin-bottom: var(--espace-l);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-block: var(--espace-xl) var(--espace-m);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-block: var(--espace-l) var(--espace-s);
+}
+
+p {
+  margin-block: 0 var(--espace-m);
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--texte);
+  outline-offset: 3px;
+  border-radius: var(--rayon-petit);
+}
+
+.icone {
+  flex: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Lien d'évitement : visible au clavier seulement. */
+.evitement {
+  position: absolute;
+  left: var(--espace-m);
+  top: -6rem;
+  z-index: 10;
+  padding: var(--espace-s) var(--espace-m);
+  background: var(--carte);
+  color: var(--texte);
+  border: 2px solid var(--bordure-forte);
+  border-radius: var(--rayon-petit);
+}
+
+.evitement:focus {
+  top: var(--espace-s);
+}
+
+.bandeau-preversion {
+  display: flex;
+  gap: var(--espace-s);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: var(--espace-s) var(--espace-m);
+  background: var(--alerte-fond);
+  color: var(--alerte-texte);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.entete {
+  padding-block: var(--espace-m) 0;
+}
+
+.entete ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-s);
+}
+
+/* Bouton : toujours une image et un mot. Cible d'au moins 44 pixels. */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-s);
+  min-height: 2.75rem;
+  padding: 0.5rem 1.125rem;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: var(--carte);
+  color: var(--accent);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bouton:hover {
+  text-decoration: underline;
+}
+
+.bouton[aria-current="page"],
+.bouton.principal {
+  background: var(--accent);
+  color: var(--sur-accent);
+}
+
+.bouton.principal {
+  min-height: 3.75rem;
+  padding-inline: var(--espace-l);
+  font-size: 1.1875rem;
+}
+
+.carte {
+  background: var(--carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon-carte);
+  padding: var(--espace-m);
+}
+
+section.carte {
+  margin-top: var(--espace-m);
+}
+
+section.carte > h2 {
+  margin-top: 0;
+  font-size: 1.3125rem;
+}
+
+section.carte > :last-child {
+  margin-bottom: 0;
+}
+
+.liste-de-mots {
+  display: grid;
+  gap: var(--espace-s);
+}
+
+.mot {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-m);
+  min-height: 3.75rem;
+  color: var(--texte);
+  text-decoration: none;
+}
+
+.mot .mot-nom {
+  flex: 1;
+  font-size: 1.3125rem;
+  font-weight: 600;
+}
+
+.mot .icone:last-child {
+  color: var(--accent);
+}
+
+.mot:hover .mot-nom {
+  text-decoration: underline;
+}
+
+.image-de-fiche {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--rayon-petit);
+  background: var(--image-neutre);
+  color: var(--texte-secondaire);
+}
+
+.image-de-fiche.grande {
+  display: flex;
+  width: 8.75rem;
+  height: 8.75rem;
+  margin: 0 auto var(--espace-m);
+  border-radius: var(--rayon-carte);
+}
+
+/* Accueil */
+.recherche label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--espace-s);
+}
+
+.champ {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-s);
+  padding-inline: var(--espace-m);
+  background: var(--carte);
+  border: 2px solid var(--bordure-forte);
+  border-radius: var(--rayon-bouton);
+  color: var(--accent);
+}
+
+.champ:focus-within {
+  outline: 3px solid var(--texte);
+  outline-offset: 3px;
+}
+
+.champ input {
+  flex: 1;
+  min-width: 0;
+  min-height: 3.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--texte);
+  font: inherit;
+  font-size: 1.3125rem;
+}
+
+.champ input:focus {
+  outline: none;
+}
+
+.champ input::placeholder {
+  color: var(--texte-secondaire);
+  opacity: 1;
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+  gap: var(--espace-s);
+}
+
+.theme {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-s);
+  height: 100%;
+  min-height: 6.5rem;
+  color: var(--texte);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.theme .icone {
+  color: var(--accent);
+}
+
+.theme:hover span {
+  text-decoration: underline;
+}
+
+.message {
+  color: var(--texte-secondaire);
+}
+
+/* Fiche */
+.fiche-entete {
+  text-align: left;
+}
+
+.fiche-entete h1 {
+  margin-bottom: var(--espace-s);
+}
+
+.fiche-theme {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-s);
+  font-size: 1rem;
+  color: var(--texte-secondaire);
+  margin: 0;
+}
+
+.ecoute {
+  margin-top: var(--espace-m);
+}
+
+.phrase {
+  margin: 0;
+  padding: 0.25rem var(--espace-s);
+  border-radius: var(--rayon-petit);
+  border-left: 0.25rem solid transparent;
+}
+
+/* Phrase en cours de lecture : un fond et un trait, pas la couleur seule. */
+.phrase.lue {
+  background: var(--surlignage);
+  border-left-color: var(--accent);
+}
+
+.sens + .sens {
+  margin-top: var(--espace-m);
+  padding-top: var(--espace-m);
+  border-top: 1px solid var(--bordure);
+}
+
+.mot-a-confondre {
+  font-weight: 600;
+  padding-inline: var(--espace-s);
+  margin-bottom: var(--espace-s);
+}
+
+.statut {
+  display: flex;
+  gap: var(--espace-s);
+  align-items: flex-start;
+  margin-block: var(--espace-m) 0;
+  padding: var(--espace-m);
+  border-radius: var(--rayon-bouton);
+  background: var(--carte);
+  color: var(--texte-secondaire);
+  font-size: 1rem;
+}
+
+.statut .icone {
+  margin-top: 0.15rem;
+}
+
+.statut.brouillon {
+  background: var(--alerte-fond);
+  color: var(--alerte-texte);
+  margin-block: 0 var(--espace-m);
+}
+
+/* Liste alphabétique */
+.lettres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-s);
+  margin-bottom: var(--espace-l);
+}
+
+.lettres a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border: 1px solid var(--bordure-forte);
+  border-radius: var(--rayon-petit);
+  background: var(--carte);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Pages de texte */
+.texte ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: var(--espace-m);
+}
+
+.texte li {
+  margin-bottom: var(--espace-s);
+}
+
+.provisoire {
+  display: flex;
+  gap: var(--espace-s);
+  padding: var(--espace-m);
+  border-radius: var(--rayon-bouton);
+  background: var(--alerte-fond);
+  color: var(--alerte-texte);
+  font-weight: 600;
+}
+
+.pied {
+  padding-block: var(--espace-l) var(--espace-xl);
+  border-top: 1px solid var(--bordure);
+  font-size: 1rem;
+  color: var(--texte-secondaire);
+}
+
+.pied ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-s) var(--espace-l);
+  margin-bottom: var(--espace-m);
+}
+
+.pied a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.credits {
+  font-size: 0.9375rem;
+  margin-bottom: var(--espace-s);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.suite {
+  margin-top: var(--espace-l);
+}

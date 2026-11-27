@@ -1,0 +1,89 @@
+---
+import "../styles/site.css";
+import Icone from "../components/Icone.astro";
+import { identifiantAppStore, noindex, preversion } from "../lib/reglages.ts";
+import { textes } from "../lib/textes.ts";
+
+interface Props {
+  titre: string;
+  description: string;
+  /** Données structurées de la page, en JSON-LD. */
+  donnees?: Record<string, unknown>;
+  /** Vrai sur la page d'un mot : propose d'ouvrir la fiche dans l'app sur iPhone. */
+  bandeauApp?: boolean;
+}
+const { titre, description, donnees, bandeauApp = false } = Astro.props;
+// Les pages sont écrites en fichiers .html, mais leur adresse publique n'a pas d'extension : /mot/facture.
+const chemin = Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "/") || "/";
+const adresse = new URL(chemin, Astro.site).href;
+const estAccueil = chemin === "/";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titre}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={adresse} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/polices/lexend-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#eef6f0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1a14" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={textes.nomDuSite} />
+    <meta property="og:title" content={titre} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={adresse} />
+    <meta property="og:locale" content="fr_FR" />
+    {bandeauApp && identifiantAppStore && <meta name="apple-itunes-app" content={`app-id=${identifiantAppStore}, app-argument=${adresse}`} />}
+    {donnees && <script type="application/ld+json" set:html={JSON.stringify(donnees).replace(/</g, "\\u003c")} />}
+  </head>
+  <body>
+    <a class="evitement" href="#contenu">{textes.allerAuContenu}</a>
+    <header>
+      {
+        preversion && (
+          <p class="bandeau-preversion">
+            <Icone nom="attention" />
+            <span>{textes.preversion}</span>
+          </p>
+        )
+      }
+      <nav class="entete" aria-label="Menu principal">
+        <ul>
+          <li>
+            <a class="bouton" href="/" aria-current={estAccueil ? "page" : undefined}>
+              <Icone nom="maison" />
+              <span>{textes.accueil}</span>
+            </a>
+          </li>
+          <li>
+            <a class="bouton" href="/mots" aria-current={chemin === "/mots" ? "page" : undefined}>
+              <Icone nom="liste" />
+              <span>{textes.tousLesMots}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="contenu" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="pied">
+      <p class="pied-nom"><strong>{textes.nomDuSite}</strong>. {textes.slogan}</p>
+      <nav aria-label="Informations">
+        <ul>
+          <li><a href="/a-propos">{textes.aPropos}</a></li>
+          <li><a href="/vie-privee">{textes.viePrivee}</a></li>
+          <li><a href="/accessibilite">{textes.accessibilite}</a></li>
+        </ul>
+      </nav>
+      <p class="credits">{textes.creditPictogrammes}</p>
+      <p class="credits">{textes.creditContenu}</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["EQUIPE_A_REMPLACER.fr.adhumi.motssimples"],
+        "components": [
+          { "/": "/mot/*", "comment": "Une page de mot ouvre la fiche dans l'app." }
+        ]
+      }
+    ]
+  }
+}

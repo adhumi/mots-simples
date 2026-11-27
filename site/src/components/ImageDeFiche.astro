@@ -1,0 +1,22 @@
+---
+// Image d'une fiche. Tant que le pictogramme n'est pas choisi, une image neutre le remplace.
+// Dans une liste, l'image est à côté du mot : elle est décorative.
+import Icone from "./Icone.astro";
+interface Props {
+  alt: string;
+  grande?: boolean;
+}
+const { alt, grande = false } = Astro.props;
+---
+
+{
+  grande ? (
+    <div class="image-de-fiche grande" role="img" aria-label={alt}>
+      <Icone nom="image" taille={72} />
+    </div>
+  ) : (
+    <span class="image-de-fiche" aria-hidden="true">
+      <Icone nom="image" taille={28} />
+    </span>
+  )
+}

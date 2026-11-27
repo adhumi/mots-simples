@@ -1,0 +1,7 @@
+# Aucun blocage ici, exprès : un robot bloqué ne lirait pas la consigne noindex.
+# Tant que la V1 n'est pas publiée, chaque page porte « noindex, nofollow »,
+# dans une balise et dans l'en-tête HTTP X-Robots-Tag.
+User-agent: *
+Allow: /
+
+Sitemap: https://motssimples.fr/sitemap.xml
