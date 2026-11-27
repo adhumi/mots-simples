@@ -16,11 +16,18 @@ extension XCUIApplication {
         try performAccessibilityAudit { defaut in
             // L'audit appelle ce bloc sur le fil principal.
             let element = MainActor.assumeIsolated {
-                defaut.element.map { "type \($0.elementType.rawValue), libellé « \($0.label) », identifiant « \($0.identifier) »" }
-                    ?? "élément inconnu"
+                defaut.element.map {
+                    let cadre = $0.frame
+                    return "type \($0.elementType.rawValue), libellé « \($0.label) », identifiant « \($0.identifier) », "
+                        + "cadre x=\(Int(cadre.minX)) y=\(Int(cadre.minY)) l=\(Int(cadre.width)) h=\(Int(cadre.height))"
+                } ?? "élément inconnu"
             }
             defauts.append("\(defaut.compactDescription) | \(element) | \(defaut.detailedDescription)")
             return true
+        }
+        let ecranEntier = windows.firstMatch.frame
+        if !defauts.isEmpty {
+            print("AUDIT [\(ecran)] écran de \(Int(ecranEntier.width)) sur \(Int(ecranEntier.height)) points")
         }
         for defaut in defauts {
             print("AUDIT [\(ecran)] \(defaut)")

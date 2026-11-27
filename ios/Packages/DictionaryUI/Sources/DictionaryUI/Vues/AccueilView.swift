@@ -99,7 +99,14 @@ struct AccueilView: View {
                 )
                     .lineLimit(1...3)
                     // « Rechercher » range le clavier : les résultats prennent tout l'écran.
+                    // Dans un champ qui passe à la ligne, la touche écrit un retour à la ligne : on le retire.
                     .onSubmit { champActif = false }
+                    .onChange(of: requete) { _, saisie in
+                        if saisie.contains(where: \.isNewline) {
+                            requete = saisie.filter { !$0.isNewline }
+                            champActif = false
+                        }
+                    }
                     .police(.sousTitre)
                     .foregroundStyle(Jetons.Couleur.texte)
                     .textInputAutocapitalization(.never)
@@ -125,7 +132,7 @@ struct AccueilView: View {
                         .police(.note)
                         .cibleMinimale()
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.secondaire)
                 .buttonBorderShape(.capsule)
                 .tint(Jetons.Couleur.accent)
                 .accessibilityIdentifier("effacer")

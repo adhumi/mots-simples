@@ -131,7 +131,7 @@ struct FicheView: View {
                         .police(.note)
                         .cibleMinimale()
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.secondaire)
                 .buttonBorderShape(.capsule)
                 .tint(Jetons.Couleur.accent)
                 .accessibilityIdentifier("partager")
