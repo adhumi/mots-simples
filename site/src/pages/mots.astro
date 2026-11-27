@@ -1,0 +1,36 @@
+---
+import ListeDeMots from "../components/ListeDeMots.astro";
+import Page from "../layouts/Page.astro";
+import { fiches, parLettre } from "../lib/contenu.ts";
+import { textes } from "../lib/textes.ts";
+
+const groupes = parLettre();
+---
+
+<Page titre={`${textes.tousLesMots} | ${textes.nomDuSite}`} description="La liste de tous les mots du dictionnaire, par ordre alphabétique.">
+  <h1>{textes.tousLesMots}</h1>
+  {
+    fiches.length === 0 ? (
+      <p class="carte message">{textes.aucunMot}</p>
+    ) : (
+      <>
+        <p class="message">{fiches.length === 1 ? textes.unMot : textes.plusieursMots(fiches.length)}</p>
+        <nav aria-label="Aller à une lettre">
+          <ul class="lettres">
+            {groupes.map((g) => (
+              <li>
+                <a href={`#lettre-${g.lettre}`}>{g.lettre}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        {groupes.map((g) => (
+          <>
+            <h2 id={`lettre-${g.lettre}`}>{g.lettre}</h2>
+            <ListeDeMots fiches={g.fiches} />
+          </>
+        ))}
+      </>
+    )
+  }
+</Page>

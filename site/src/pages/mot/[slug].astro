@@ -1,0 +1,119 @@
+---
+import Icone from "../../components/Icone.astro";
+import ImageDeFiche from "../../components/ImageDeFiche.astro";
+import ListeDeMots from "../../components/ListeDeMots.astro";
+import Statut from "../../components/Statut.astro";
+import Page from "../../layouts/Page.astro";
+import { fiche as trouver, fiches, motsLies, nomDuTheme } from "../../lib/contenu.ts";
+import { textes } from "../../lib/textes.ts";
+
+// Une page par fiche du mode choisi. L'adresse /mot/<slug> ne change jamais.
+export function getStaticPaths() {
+  return fiches.map((f) => ({ params: { slug: f.slug }, props: { fiche: f } }));
+}
+
+const { fiche } = Astro.props;
+const lies = motsLies(fiche);
+const confusion = fiche.a_ne_pas_confondre;
+const confusionAUnePage = confusion ? trouver(confusion.mot) !== undefined : false;
+// Coupe la différence en phrases, pour les lire et les mettre en évidence une par une.
+const phrasesDeDifference = confusion ? confusion.difference.split(/(?<=[.!?])\s+/) : [];
+// La voix lit la prononciation quand elle existe, surtout pour les sigles.
+const motADire = fiche.prononciation ?? fiche.mot;
+
+const donnees = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  name: fiche.mot,
+  description: fiche.definition.join(" "),
+  url: new URL(`/mot/${fiche.slug}`, Astro.site).href,
+  inLanguage: "fr",
+  inDefinedTermSet: { "@type": "DefinedTermSet", name: textes.nomDuSite, url: new URL("/", Astro.site).href },
+};
+---
+
+<Page titre={textes.titreDeFiche(fiche.mot)} description={fiche.definition[0]} donnees={donnees} bandeauApp>
+  <article data-fiche>
+    {fiche.statut === "brouillon" && <Statut fiche={fiche} />}
+
+    <header class="carte fiche-entete">
+      <ImageDeFiche alt={fiche.pictogramme.alt} grande />
+      <h1 data-lire={motADire}>{fiche.mot}</h1>
+      <p class="fiche-theme">
+        <Icone nom="etiquette" taille={20} />
+        <span>{textes.theme} : <a href={`/theme/${fiche.theme}`}>{nomDuTheme(fiche.theme)}</a></span>
+      </p>
+      {/* Le bouton n'apparaît que si le navigateur a une voix française. */}
+      <p class="ecoute" hidden data-ecoute>
+        <button class="bouton principal" type="button" data-tout-ecouter data-texte-ecouter={textes.toutEcouter} data-texte-arreter={textes.arreter}>
+          <span data-icone-ecouter><Icone nom="ecouter" /></span>
+          <span data-icone-arreter hidden><Icone nom="arreter" /></span>
+          <span data-libelle>{textes.toutEcouter}</span>
+        </button>
+      </p>
+    </header>
+
+    <section class="carte">
+      <h2>{textes.definition}</h2>
+      {fiche.definition.map((phrase) => <p class="phrase" data-lire>{phrase}</p>)}
+    </section>
+
+    <section class="carte">
+      <h2 data-lire={`${textes.exemple}.`}>{textes.exemple}</h2>
+      <p class="phrase" data-lire>{fiche.exemple}</p>
+    </section>
+
+    {
+      fiche.autres_sens.length > 0 && (
+        <section class="carte">
+          <h2 data-lire={`${textes.autresSens}.`}>{fiche.autres_sens.length > 1 ? textes.autresSens : textes.autreSens}</h2>
+          {fiche.autres_sens.map((sens) => (
+            <div class="sens">
+              {sens.definition.map((phrase) => (
+                <p class="phrase" data-lire>
+                  {phrase}
+                </p>
+              ))}
+              {sens.exemple && (
+                <p class="phrase" data-lire>
+                  {sens.exemple}
+                </p>
+              )}
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      confusion && (
+        <section class="carte">
+          <h2>{textes.aNePasConfondre}</h2>
+          <p class="mot-a-confondre" data-lire={textes.aNePasConfondreAvec(confusion.nom)}>
+            {confusionAUnePage ? <a href={`/mot/${confusion.mot}`}>{confusion.nom}</a> : confusion.nom}
+          </p>
+          {phrasesDeDifference.map((phrase) => (
+            <p class="phrase" data-lire>
+              {phrase}
+            </p>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      lies.length > 0 && (
+        <>
+          <h2>{textes.motsLies}</h2>
+          <ListeDeMots fiches={lies} />
+        </>
+      )
+    }
+
+    {fiche.statut !== "brouillon" && <Statut fiche={fiche} />}
+  </article>
+
+  <script>
+    import "../../scripts/ecouter.ts";
+  </script>
+</Page>

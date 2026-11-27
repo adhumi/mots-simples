@@ -1,0 +1,16 @@
+---
+import Icone from "../components/Icone.astro";
+import Page from "../layouts/Page.astro";
+import { textes } from "../lib/textes.ts";
+---
+
+<Page titre={`${textes.pageIntrouvable} | ${textes.nomDuSite}`} description={textes.pageIntrouvableExplication}>
+  <h1>{textes.pageIntrouvable}</h1>
+  <p>{textes.pageIntrouvableExplication}</p>
+  <p>
+    <a class="bouton principal" href="/">
+      <Icone nom="maison" />
+      <span>{textes.retourAccueil}</span>
+    </a>
+  </p>
+</Page>

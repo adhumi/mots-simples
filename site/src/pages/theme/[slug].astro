@@ -1,0 +1,26 @@
+---
+import Icone from "../../components/Icone.astro";
+import ListeDeMots from "../../components/ListeDeMots.astro";
+import Page from "../../layouts/Page.astro";
+import { fichesDuTheme, themes } from "../../lib/contenu.ts";
+import { textes } from "../../lib/textes.ts";
+
+// Les huit thèmes ont toujours leur page, même vide.
+export function getStaticPaths() {
+  return themes.map((t) => ({ params: { slug: t.slug }, props: { theme: t } }));
+}
+
+const { theme } = Astro.props;
+const liste = fichesDuTheme(theme.slug);
+---
+
+<Page titre={`${theme.nom} : les mots du thème | ${textes.nomDuSite}`} description={`Les mots du thème ${theme.nom}, expliqués simplement.`}>
+  <h1>{theme.nom}</h1>
+  {liste.length === 0 ? <p class="carte message">{textes.aucunMotDansLeTheme}</p> : <ListeDeMots fiches={liste} />}
+  <p class="suite">
+    <a class="bouton" href="/">
+      <Icone nom="maison" />
+      <span>{textes.retourAccueil}</span>
+    </a>
+  </p>
+</Page>

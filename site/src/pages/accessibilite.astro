@@ -1,0 +1,30 @@
+---
+import Icone from "../components/Icone.astro";
+import Page from "../layouts/Page.astro";
+import { textes } from "../lib/textes.ts";
+---
+
+<Page titre={`${textes.accessibilite} | ${textes.nomDuSite}`} description="Ce que nous faisons pour que le site soit utilisable par tout le monde.">
+  <div class="texte">
+    <h1>{textes.accessibilite}</h1>
+    <p class="provisoire"><Icone nom="attention" /><span>{textes.texteProvisoire}</span></p>
+
+    <h2>En simple</h2>
+    <p>Ce site doit être utilisable par tout le monde.</p>
+    <ul>
+      <li>Vous pouvez agrandir le texte.</li>
+      <li>Vous pouvez utiliser le site avec le clavier.</li>
+      <li>Vous pouvez utiliser un lecteur d'écran.</li>
+      <li>Le site marche en clair et en sombre.</li>
+      <li>Le site marche sans JavaScript.</li>
+    </ul>
+
+    <h2>État de conformité</h2>
+    <p>Le site vise les règles RGAA 4 et WCAG 2.2, niveau AA.</p>
+    <p>Un audit complet n'est pas encore fait. Il est prévu avant l'ouverture du site.</p>
+    <p>Des contrôles automatiques tournent à chaque modification du site.</p>
+
+    <h2>Un problème ?</h2>
+    <p>Le moyen de signaler un problème sera ajouté avant l'ouverture du site.</p>
+  </div>
+</Page>
