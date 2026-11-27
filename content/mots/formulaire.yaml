@@ -1,0 +1,41 @@
+schema: 1
+mot: Formulaire
+slug: formulaire
+prononciation: null
+theme: papiers
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un formulaire est un document avec des questions et des cases à remplir.
+  - Vous y écrivez vos informations, comme votre nom et votre adresse.
+  - Il existe sur papier ou sur internet.
+
+exemple: Pour demander une aide, vous remplissez un formulaire et vous le signez.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - dossier
+  - signature
+  - piece-jointe
+
+formes_de_recherche:
+  - formulaires
+  - formulère
+  - formulair
+  - formullaire
+  - Cerfa
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une feuille avec des cases à cocher et un stylo.
+
+source_de_reference: null
+
+notes_de_relecture:
+  - Mot courant, sans source dans la liste. Le contrôle le signale car le thème est « papiers ».
+  - « Informations » est-il compris ? Alternative, « ce qu'on vous demande ».
