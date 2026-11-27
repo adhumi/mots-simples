@@ -1,0 +1,52 @@
+schema: 1
+mot: Curatelle
+slug: curatelle
+prononciation: null
+theme: justice
+statut: brouillon
+valide_le: null
+
+definition:
+  - Une curatelle est une protection décidée par un juge.
+  - Une personne, appelée curateur, vous aide pour les décisions importantes.
+  - Vous continuez à décider vous-même pour la vie de tous les jours.
+
+exemple: "Marc est sous curatelle : il signe son bail avec son curateur."
+
+autres_sens: []
+
+a_ne_pas_confondre:
+  mot: tutelle
+  difference: Dans une tutelle, une personne agit à votre place pour les décisions importantes.
+
+mots_lies:
+  - tutelle
+  - juge
+  - droit
+  - signature
+
+formes_de_recherche:
+  - curatelles
+  - curatèle
+  - curatel
+  - curattelle
+  - sous curatelle
+  - curateur
+  - curatrice
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Deux personnes regardent ensemble un document, l'une conseille l'autre.
+
+source_de_reference:
+  titre: service-public.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur service-public.fr.
+  - Mot sensible. La fiche insiste sur ce que la personne continue à décider.
+  - Il existe plusieurs sortes de curatelle, plus ou moins fortes. La fiche décrit la plus simple. À vérifier.
+  - « Curateur » est de la famille du mot, mais il faut bien le nommer.
+  - « Protection » est abstrait. Alternative à tester, « une aide décidée par un juge ».
