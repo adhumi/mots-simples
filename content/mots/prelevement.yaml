@@ -1,0 +1,52 @@
+schema: 1
+mot: Prélèvement
+slug: prelevement
+prononciation: null
+theme: argent
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un prélèvement est une façon de payer sans rien faire vous-même.
+  - Vous donnez votre accord une seule fois.
+  - Ensuite, l'argent part tout seul de votre compte à chaque paiement.
+
+exemple: Votre loyer est payé par prélèvement au début de chaque mois.
+
+autres_sens:
+  - definition:
+      - C'est aussi un peu de sang pris par une infirmière pour un examen.
+    exemple: L'infirmière fait un prélèvement de sang à votre bras.
+
+a_ne_pas_confondre:
+  mot: virement
+  difference: Le virement, c'est vous qui l'envoyez. Le prélèvement est pris par celui que vous payez.
+
+mots_lies:
+  - rib
+  - facture
+  - echeance
+  - virement
+
+formes_de_recherche:
+  - prélèvements
+  - prélevement
+  - prelèvement
+  - prélevment
+  - prélèvement automatique
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Des pièces qui sortent d'un compte en banque avec une flèche.
+
+source_de_reference:
+  titre: mesquestionsdargent.fr (Banque de France), page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur mesquestionsdargent.fr.
+  - « Sans rien faire vous-même » simplifie. Vous signez d'abord un accord, appelé mandat.
+  - Le mot « compte » veut dire compte en banque. Est-il compris seul ?
+  - Le sens médical est-il utile ici ? Les gens disent plutôt « prise de sang ».
