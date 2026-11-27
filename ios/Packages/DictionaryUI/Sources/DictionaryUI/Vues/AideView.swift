@@ -23,7 +23,8 @@ struct AideView: View {
                     BoutonEcoute(
                         lecture: "essai-de-voix",
                         enonces: [Enonce(id: "essai-de-voix", texte: Textes.essaiDeVoix)],
-                        libelleAccessible: Textes.ecouterUnEssai
+                        libelleAccessible: Textes.ecouterUnEssai,
+                        avecTexte: true
                     )
                 }
 
