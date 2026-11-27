@@ -49,6 +49,8 @@ public enum Destination: Hashable, Sendable {
     case themes
     /// Les mots d'un thème, par son slug.
     case theme(String)
+    /// Aide et à propos.
+    case aide
 }
 
 /// L'état de la navigation. Il est partagé pour que Siri, Spotlight et les liens puissent ouvrir une fiche.
@@ -57,6 +59,8 @@ public enum Destination: Hashable, Sendable {
 public final class Aiguillage {
     /// Les écrans empilés au-dessus de l'accueil.
     public var chemin: [Destination] = []
+    /// Un mot à mettre dans le champ de recherche, demandé par Siri ou par un lien. L'accueil le lit puis le vide.
+    public var rechercheDemandee: String?
 
     public init() {}
 
@@ -75,5 +79,16 @@ public final class Aiguillage {
 
     public func retourALAccueil() {
         chemin = []
+    }
+
+    /// Ouvre la fiche qui correspond à un mot. Sans fiche, revient à l'accueil avec le mot dans la recherche :
+    /// l'écran « Mot absent » s'affiche alors, avec les mots proches.
+    public func expliquer(_ mot: String, dans dictionnaire: Dictionnaire) {
+        if let fiche = dictionnaire.ficheExacte(pour: mot) {
+            ouvrir(.fiche(fiche.slug))
+        } else {
+            chemin = []
+            rechercheDemandee = mot
+        }
     }
 }

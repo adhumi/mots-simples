@@ -1,3 +1,4 @@
+import CoreSpotlight
 import DictionaryCore
 import SwiftUI
 
@@ -29,6 +30,8 @@ public struct RacineView: View {
                         ThemesView()
                     case .theme(let slug):
                         ThemeView(slug: slug)
+                    case .aide:
+                        AideView()
                     }
                 }
         }
@@ -43,7 +46,24 @@ public struct RacineView: View {
             guard phase == .active else { return }
             await demandes.envoyerCeQuiAttend()
             await Contenu.mettreAJour(bibliotheque, configuration: configuration)
+            await IndexSpotlight.mettreAJour(dictionnaire: bibliotheque.dictionnaire)
         }
+        // Un mot choisi dans Spotlight ouvre sa fiche.
+        .onContinueUserActivity(CSSearchableItemActionType) { activite in
+            if let slug = IndexSpotlight.slug(depuis: activite) {
+                aiguillage.ouvrir(.fiche(slug))
+            }
+        }
+        // Un lien vers https://motssimples.fr/mot/<slug> ouvre la fiche dans l'app.
+        .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activite in
+            if let adresse = activite.webpageURL { ouvrir(adresse) }
+        }
+        .onOpenURL { adresse in ouvrir(adresse) }
+    }
+
+    private func ouvrir(_ adresse: URL) {
+        guard let slug = LienDeMot.slug(depuis: adresse) else { return }
+        aiguillage.ouvrir(.fiche(slug))
         .tint(Jetons.Couleur.accent)
     }
 }

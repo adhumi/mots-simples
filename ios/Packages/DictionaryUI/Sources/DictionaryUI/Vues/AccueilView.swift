@@ -6,6 +6,7 @@ struct AccueilView: View {
     @Environment(Bibliotheque.self) private var bibliotheque
     @Environment(Aiguillage.self) private var aiguillage
     @Environment(LecteurVocal.self) private var lecteur
+    @Environment(\.configuration) private var configuration
     @State private var requete = ""
     @FocusState private var champActif: Bool
     @State private var dictee = DicteeVocale()
@@ -26,7 +27,9 @@ struct AccueilView: View {
 
                 champDeRecherche
 
-                autresFaconsDeChercher
+                if !configuration.modeReduit {
+                    autresFaconsDeChercher
+                }
 
                 if bibliotheque.dictionnaire.fiches.isEmpty {
                     message(Textes.dictionnaireVide)
@@ -35,6 +38,12 @@ struct AccueilView: View {
                 } else {
                     derniersMots
                 }
+
+                if !configuration.modeReduit && !requeteUtile {
+                    BoutonDAction(titre: Textes.aideEtAPropos, image: "questionmark.circle.fill", identifiant: "aide") {
+                        aiguillage.allerA(.aide)
+                    }
+                }
             }
             .miseEnPageDEcran()
         }
@@ -42,7 +51,7 @@ struct AccueilView: View {
         .background(Jetons.Couleur.fond)
         // Bouton flottant, en verre : le seul chemin vers les thèmes. Pas de barre d'onglets.
         .safeAreaInset(edge: .bottom) {
-            if !champActif && !bibliotheque.dictionnaire.fiches.isEmpty {
+            if !champActif && !configuration.modeReduit && !bibliotheque.dictionnaire.fiches.isEmpty {
                 Button {
                     aiguillage.allerA(.themes)
                 } label: {
@@ -55,6 +64,13 @@ struct AccueilView: View {
                 .padding(.horizontal, Jetons.Espace.m)
                 .padding(.bottom, Jetons.Espace.s)
                 .accessibilityIdentifier("voir-les-themes")
+            }
+        }
+        // Siri ou un lien a demandé un mot sans fiche : il arrive dans la recherche.
+        .onChange(of: aiguillage.rechercheDemandee, initial: true) { _, demande in
+            if let demande {
+                requete = demande
+                aiguillage.rechercheDemandee = nil
             }
         }
         .navigationTitle(Textes.nomDeLApp)
