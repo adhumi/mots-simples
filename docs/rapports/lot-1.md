@@ -62,7 +62,7 @@ Pour « formulaire », la liste ne donne pas de source, mais le thème « papier
 - **Expressions** (carte Vitale, médecin traitant) : un mot de l'expression revient dans la définition. Le contrôle l'accepte, la consigne moins. Signalé en note.
 - **« Congés payés »** reste au pluriel, comme dans l'usage et dans la liste.
 - **Autres sens gardés** : échéance (somme à payer), prélèvement (sang), ordonnance (juge), préavis (travail, grève).
-- **Branches.** La session impose aussi la branche `claude/amazing-goldberg-9rwyv0`. Voir le rapport du lot 4 pour l'état des branches poussées.
+- **Branches.** Une branche par lot : `lot-1` à `lot-4`, chacune partie de la précédente. La session de travail impose aussi une branche `claude/amazing-goldberg-9rwyv0` : elle porte le même état que `lot-4`.
 
 ## Relecture d'ensemble
 
