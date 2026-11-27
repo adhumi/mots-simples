@@ -3,4 +3,5 @@ dist/
 dist-public/
 dist-interdit/
 .astro/
+donnees/
 .DS_Store

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "check": "tsx tools/check-fiches.ts",
-    "test": "tsx --test tools/*.test.ts",
+    "test": "tsx --test tools/*.test.ts server/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "ci": "npm run typecheck && npm test && npm run check && npm run build:content && npm run build:content -- --preversion --out dist/preversion/contenu/v1 && npm run embed:content -- --check && npm run check:site",
     "build:content": "tsx tools/build-content.ts",
