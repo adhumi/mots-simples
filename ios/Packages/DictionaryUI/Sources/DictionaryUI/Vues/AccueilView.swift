@@ -73,7 +73,6 @@ struct AccueilView: View {
                 aiguillage.rechercheDemandee = nil
             }
         }
-        .navigationTitle(Textes.nomDeLApp)
         .navigationBarTitleDisplayMode(.inline)
     }
 

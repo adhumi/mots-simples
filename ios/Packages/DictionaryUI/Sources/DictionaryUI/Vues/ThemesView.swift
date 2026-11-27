@@ -28,7 +28,6 @@ struct ThemesView: View {
             .miseEnPageDEcran()
         }
         .background(Jetons.Couleur.fond)
-        .navigationTitle(Textes.lesThemes)
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -104,7 +103,6 @@ struct ThemeView: View {
             .miseEnPageDEcran()
         }
         .background(Jetons.Couleur.fond)
-        .navigationTitle(dictionnaire.nomDuTheme(slug))
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear { lecteur.arreter() }
     }

@@ -7,6 +7,17 @@ final class AccessibiliteTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Ferme l'app à la fin de chaque test et attend qu'elle soit vraiment arrêtée.
+    /// Sans cela, le test suivant échoue parfois à son lancement : « Failed to terminate ».
+    @MainActor
+    override func tearDown() async throws {
+        let app = XCUIApplication()
+        if app.state != .notRunning {
+            app.terminate()
+            _ = app.wait(for: .notRunning, timeout: 30)
+        }
+    }
+
     @MainActor
     private func lancer(tailleDeTexte: String? = nil) -> XCUIApplication {
         let app = XCUIApplication()

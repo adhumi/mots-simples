@@ -56,7 +56,6 @@ struct AideView: View {
             .miseEnPageDEcran()
         }
         .background(Jetons.Couleur.fond)
-        .navigationTitle(Textes.aideEtAPropos)
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear { lecteur.arreter() }
     }

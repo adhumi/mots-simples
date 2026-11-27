@@ -43,9 +43,17 @@ struct BoutonDAction: View {
 
     var body: some View {
         Button(action: action) {
-            Label(titre, systemImage: image)
-                .police(.corpsFort)
-                .frame(maxWidth: .infinity, minHeight: Jetons.Taille.ciblePrincipale)
+            // L'image est centrée en hauteur sur tout le texte, même quand il tient sur plusieurs lignes.
+            // Une étiquette standard aligne l'image sur la première ligne seulement.
+            HStack(alignment: .center, spacing: Jetons.Espace.s) {
+                Image(systemName: image)
+                    .accessibilityHidden(true)
+                Text(titre)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .police(.corpsFort)
+            .frame(maxWidth: .infinity, minHeight: Jetons.Taille.ciblePrincipale, alignment: .center)
         }
         .buttonStyle(.bordered)
         .buttonBorderShape(.roundedRectangle(radius: Jetons.Rayon.bouton))
