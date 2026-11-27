@@ -50,7 +50,8 @@ private struct Ecran: ViewModifier {
 struct BoutonSecondaire: ButtonStyle {
     @Environment(\.isEnabled) private var actif
 
-    func makeBody(configuration: Configuration) -> some View {
+    // « ButtonStyleConfiguration » en toutes lettres : le module a son propre type « Configuration ».
+    func makeBody(configuration: ButtonStyleConfiguration) -> some View {
         let forme = RoundedRectangle(cornerRadius: Jetons.Rayon.bouton, style: .continuous)
         configuration.label
             .foregroundStyle(Jetons.Couleur.accent)
