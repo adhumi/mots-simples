@@ -129,6 +129,15 @@ final class EcransTests: XCTestCase {
         XCUIDevice.shared.orientation = .landscapeLeft
         defer { XCUIDevice.shared.orientation = .portrait }
         let app = lancer()
+        // La rotation prend un instant. Tant qu'elle n'est pas finie, le champ a une taille de passage et ne se touche pas.
+        let fenetre = app.windows.firstMatch
+        let champ = app.textFields["champ-recherche"]
+        let limite = Date().addingTimeInterval(10)
+        while Date() < limite && !(fenetre.frame.width > fenetre.frame.height && champ.isHittable) {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+        XCTAssertGreaterThan(fenetre.frame.width, fenetre.frame.height, "L'écran n'est pas passé en paysage.")
+        XCTAssertTrue(champ.isHittable, "Le champ de recherche ne se touche pas en paysage.")
         chercher(app, "facture")
         app.buttons["mot-facture"].firstMatch.tap()
         XCTAssertTrue(app.buttons["tout-ecouter"].waitForExistence(timeout: 5))
