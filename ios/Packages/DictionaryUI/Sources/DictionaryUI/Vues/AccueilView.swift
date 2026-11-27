@@ -208,10 +208,53 @@ struct AccueilView: View {
     }
 }
 
+extension MotAbsentView {
+    /// « Demander ce mot ». Seul le mot part. Le texte ne peut pas partir s'il contient autre chose que des lettres.
+    @ViewBuilder
+    fileprivate var demande: some View {
+        if demandes.disponible, let mot = Demande.nettoyer(requete) {
+            VStack(alignment: .leading, spacing: Jetons.Espace.s) {
+                switch demandes.etat(pour: mot) {
+                case .envoye:
+                    Label(Textes.demandeEnvoyee, systemImage: "checkmark.circle.fill")
+                        .police(.corpsFort)
+                        .foregroundStyle(Jetons.Couleur.texte)
+                        .accessibilityIdentifier("demande-envoyee")
+                case .enAttente:
+                    Label(Textes.demandeEnAttente, systemImage: "clock.fill")
+                        .police(.corpsFort)
+                        .foregroundStyle(Jetons.Couleur.texte)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("demande-en-attente")
+                case .envoi:
+                    Label(Textes.demandeEnCours, systemImage: "paperplane.fill")
+                        .police(.corpsFort)
+                        .foregroundStyle(Jetons.Couleur.texte)
+                case nil:
+                    Text(Textes.seulLeMotPart(mot))
+                        .police(.corps)
+                        .foregroundStyle(Jetons.Couleur.texte)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(Textes.rienDePersonnel)
+                        .police(.corpsFort)
+                        .foregroundStyle(Jetons.Couleur.texte)
+                        .fixedSize(horizontal: false, vertical: true)
+                    BoutonDAction(titre: Textes.demanderCeMot, image: "paperplane.fill", identifiant: "demander-ce-mot") {
+                        Task { await demandes.demander(mot) }
+                    }
+                }
+            }
+            .carte()
+        }
+    }
+}
+
 /// Le mot cherché n'a pas de fiche. On le dit simplement et on propose des mots proches.
 struct MotAbsentView: View {
     let requete: String
     @Environment(Bibliotheque.self) private var bibliotheque
+    @Environment(ServiceDeDemandes.self) private var demandes
+    @Environment(\.configuration) private var configuration
 
     var body: some View {
         VStack(alignment: .leading, spacing: Jetons.Espace.l) {
@@ -226,6 +269,10 @@ struct MotAbsentView: View {
             }
             .carte()
             .accessibilityIdentifier("mot-absent")
+
+            if !configuration.modeReduit {
+                demande
+            }
 
             let proches = bibliotheque.dictionnaire.motsProches(de: requete)
             if !proches.isEmpty {

@@ -43,6 +43,14 @@ public enum Textes {
     public static var motAbsent: String { String(localized: "Ce mot n'est pas encore dans le dictionnaire.", bundle: .module) }
     public static var motsProches: String { String(localized: "Mots proches", bundle: .module) }
 
+    // Demander un mot
+    public static var demanderCeMot: String { String(localized: "Demander ce mot", bundle: .module) }
+    public static func seulLeMotPart(_ mot: String) -> String { String(localized: "Seul le mot « \(mot) » est envoyé. Nous ne savons pas qui vous êtes.", bundle: .module) }
+    public static var rienDePersonnel: String { String(localized: "N'envoyez pas votre nom. N'envoyez rien de personnel.", bundle: .module) }
+    public static var demandeEnvoyee: String { String(localized: "Merci. Le mot est envoyé.", bundle: .module) }
+    public static var demandeEnAttente: String { String(localized: "Il n'y a pas d'internet. Le mot partira plus tard, tout seul.", bundle: .module) }
+    public static var demandeEnCours: String { String(localized: "Le mot part…", bundle: .module) }
+
     // Écoute
     public static var ecouter: String { String(localized: "Écouter", bundle: .module) }
     public static var arreter: String { String(localized: "Arrêter", bundle: .module) }
