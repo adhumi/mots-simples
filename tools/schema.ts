@@ -16,6 +16,18 @@ export const THEMES = [
   "vie-quotidienne",
 ] as const;
 
+/** Nom affiché de chaque thème. Le paquet de contenu, le site et l'app l'utilisent. */
+export const NOMS_DES_THEMES: Record<(typeof THEMES)[number], string> = {
+  argent: "Argent",
+  sante: "Santé",
+  logement: "Logement",
+  travail: "Travail",
+  papiers: "Papiers",
+  justice: "Justice",
+  transports: "Transports",
+  "vie-quotidienne": "Vie quotidienne",
+};
+
 export const STATUTS = ["brouillon", "relu", "valide"] as const;
 
 const slug = z

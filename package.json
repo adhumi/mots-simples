@@ -12,7 +12,8 @@
     "check": "tsx tools/check-fiches.ts",
     "test": "tsx --test tools/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "ci": "npm run typecheck && npm test && npm run check"
+    "ci": "npm run typecheck && npm test && npm run check && npm run build:content && npm run build:content -- --preversion --out dist/preversion/contenu/v1",
+    "build:content": "tsx tools/build-content.ts"
   },
   "dependencies": {
     "yaml": "^2.6.0",
