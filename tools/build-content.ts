@@ -4,7 +4,7 @@
 //         options : --out <dossier>  --date AAAA-MM-JJ  --racine <dossier>
 // Le format est décrit dans docs/paquet.md.
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
@@ -12,7 +12,27 @@ import { controlerDossier } from "./check-fiches.ts";
 import { NOMS_DES_THEMES, SCHEMA_VERSION, THEMES, ficheSchema, type Fiche } from "./schema.ts";
 
 /** Une fiche telle qu'elle sort du dépôt : sans les champs internes. */
-export type FichePubliee = Omit<Fiche, "source_de_reference" | "notes_de_relecture">;
+export type FichePubliee = Omit<Fiche, "source_de_reference" | "notes_de_relecture" | "a_ne_pas_confondre" | "autres_sens"> & {
+  autres_sens: { definition: string[]; exemple: string | null }[];
+  /** `nom` est le mot tel qu'on l'écrit, pour l'afficher même s'il n'a pas encore de fiche. */
+  a_ne_pas_confondre: { mot: string; nom: string; difference: string } | null;
+};
+
+/** Le nom à afficher pour chaque slug : celui de la fiche, sinon celui de content/liste-v1.csv. */
+export type Noms = Map<string, string>;
+
+export function lireNoms(racine: string, fiches: Fiche[]): Noms {
+  const noms: Noms = new Map();
+  const liste = join(racine, "content", "liste-v1.csv");
+  if (existsSync(liste)) {
+    for (const ligne of readFileSync(liste, "utf8").trim().split(/\r?\n/).slice(1)) {
+      const [mot, slug] = ligne.split(",");
+      if (mot && slug) noms.set(slug, mot);
+    }
+  }
+  for (const f of fiches) noms.set(f.slug, f.mot);
+  return noms;
+}
 
 export type Paquet = {
   schema: number;
@@ -32,7 +52,7 @@ export type Manifeste = {
   taille: number;
 };
 
-export type Options = { preversion: boolean; date?: string };
+export type Options = { preversion: boolean; date?: string; noms?: Noms };
 
 function sha256(texte: string | Buffer): string {
   return createHash("sha256").update(texte).digest("hex");
@@ -53,7 +73,7 @@ export function estPubliable(fiche: Pick<Fiche, "statut">, preversion: boolean):
 }
 
 /** Retire les champs internes et fixe l'ordre des clés, pour une sortie stable. */
-export function publier(fiche: Fiche): FichePubliee {
+export function publier(fiche: Fiche, noms: Noms = new Map()): FichePubliee {
   return {
     schema: fiche.schema,
     mot: fiche.mot,
@@ -66,7 +86,11 @@ export function publier(fiche: Fiche): FichePubliee {
     exemple: fiche.exemple,
     autres_sens: fiche.autres_sens.map((s) => ({ definition: s.definition, exemple: s.exemple ?? null })),
     a_ne_pas_confondre: fiche.a_ne_pas_confondre
-      ? { mot: fiche.a_ne_pas_confondre.mot, difference: fiche.a_ne_pas_confondre.difference }
+      ? {
+          mot: fiche.a_ne_pas_confondre.mot,
+          nom: noms.get(fiche.a_ne_pas_confondre.mot) ?? fiche.a_ne_pas_confondre.mot.replace(/-/g, " "),
+          difference: fiche.a_ne_pas_confondre.difference,
+        }
       : null,
     mots_lies: fiche.mots_lies,
     formes_de_recherche: fiche.formes_de_recherche,
@@ -81,7 +105,8 @@ function dateDuContenu(fiches: Fiche[]): string {
 }
 
 export function construirePaquet(toutes: Fiche[], options: Options): Paquet {
-  const fiches = toutes.filter((f) => estPubliable(f, options.preversion)).map(publier);
+  const noms = options.noms ?? new Map(toutes.map((f) => [f.slug, f.mot]));
+  const fiches = toutes.filter((f) => estPubliable(f, options.preversion)).map((f) => publier(f, noms));
   const themes = THEMES.map((slug) => ({ slug, nom: NOMS_DES_THEMES[slug] }));
   const corps = { schema: SCHEMA_VERSION, preversion: options.preversion, themes, fiches };
   return {
@@ -115,7 +140,9 @@ export function genererPaquet(racine: string, sortie: string, options: Options):
   if (erreurs.length > 0) {
     throw new Error(`Le contrôle des fiches échoue, le paquet n'est pas généré :\n${erreurs.join("\n")}`);
   }
-  const { paquetJson, manifestJson, manifeste } = serialiser(construirePaquet(lireFiches(racine), options));
+  const toutes = lireFiches(racine);
+  const noms = options.noms ?? lireNoms(racine, toutes);
+  const { paquetJson, manifestJson, manifeste } = serialiser(construirePaquet(toutes, { ...options, noms }));
   mkdirSync(sortie, { recursive: true });
   writeFileSync(join(sortie, "paquet.json"), paquetJson);
   writeFileSync(join(sortie, "manifest.json"), manifestJson);

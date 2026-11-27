@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "version": "c6283ccafb54",
+  "version": "81136d992ea1",
   "preversion": true,
   "paquet": "paquet.json",
-  "sha256": "2577805d2345afe9c982db820ca98a9b30d7ba98bbfa82e1ed801943f6aeb9d2",
-  "taille": 16648
+  "sha256": "2de05888f95d2be12c73f3266d2ba96f06578b26af016141de5ae39bb127a591",
+  "taille": 16778
 }

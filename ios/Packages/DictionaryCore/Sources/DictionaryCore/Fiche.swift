@@ -25,12 +25,18 @@ public struct AutreSens: Codable, Sendable, Hashable {
 public struct MotAConfondre: Codable, Sendable, Hashable {
     /// Slug du mot proche.
     public let mot: String
+    /// Le mot tel qu'on l'écrit. Présent même si le mot n'a pas encore de fiche.
+    public let nom: String?
     public let difference: String
 
-    public init(mot: String, difference: String) {
+    public init(mot: String, nom: String? = nil, difference: String) {
         self.mot = mot
+        self.nom = nom
         self.difference = difference
     }
+
+    /// Le nom à afficher et à dire.
+    public var nomAffiche: String { nom ?? mot.replacingOccurrences(of: "-", with: " ") }
 }
 
 public struct Pictogramme: Codable, Sendable, Hashable {

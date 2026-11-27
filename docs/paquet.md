@@ -52,6 +52,8 @@ Le dossier de sortie contient deux fichiers. Le « v1 » du chemin est la versio
 Une fiche du paquet a les champs de `tools/schema.ts`, dans le même ordre, **sauf** `source_de_reference` et `notes_de_relecture`.
 Ces deux champs sont internes : ils restent dans le dépôt.
 Dans `autres_sens`, `exemple` est toujours présent, à `null` s'il est vide.
+Dans `a_ne_pas_confondre`, le champ `nom` est ajouté : le mot tel qu'on l'écrit, pris dans sa fiche ou dans `content/liste-v1.csv`.
+Il permet d'afficher le mot même s'il n'a pas encore de fiche.
 
 ### `manifest.json`
 

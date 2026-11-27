@@ -83,3 +83,14 @@ test("une erreur du contrôle arrête la génération", () => {
   assert.throws(() => genererPaquet(copie, sortie, { preversion: true }), /contrôle des fiches échoue/);
   assert.ok(!existsSync(join(sortie, "paquet.json")));
 });
+
+test("« à ne pas confondre » porte le nom du mot, même sans fiche", () => {
+  const sortie = mkdtempSync(join(tmpdir(), "paquet-"));
+  genererPaquet(racine, sortie, { preversion: true });
+  const paquet = JSON.parse(readFileSync(join(sortie, "paquet.json"), "utf8"));
+  const facture = paquet.fiches.find((f: { slug: string }) => f.slug === "facture");
+  assert.deepEqual(facture.a_ne_pas_confondre.mot, "devis");
+  assert.deepEqual(facture.a_ne_pas_confondre.nom, "Devis");
+  const conges = paquet.fiches.find((f: { slug: string }) => f.slug === "conges-payes");
+  assert.equal(conges.a_ne_pas_confondre.nom, "Arrêt de travail");
+});
