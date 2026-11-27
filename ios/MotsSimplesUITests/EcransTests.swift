@@ -91,14 +91,6 @@ final class EcransTests: XCTestCase {
         app.buttons["vitesse-normale"].tap()
     }
 
-    @MainActor
-    func testLaFichePeutEtrePartagee() {
-        let app = lancer()
-        chercher(app, "facture")
-        app.buttons["mot-facture"].firstMatch.tap()
-        XCTAssertTrue(app.buttons["partager"].waitForExistence(timeout: 5))
-    }
-
     /// Captures aux plus grandes tailles de texte, en clair et en sombre. À lancer sur iPhone et sur iPad.
     /// Les images sont jointes au résultat du test, dans Xcode.
     @MainActor

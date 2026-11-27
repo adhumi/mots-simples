@@ -43,9 +43,6 @@ public enum Textes {
     public static var motAbsent: String { String(localized: "Ce mot n'est pas encore dans le dictionnaire.", bundle: .module) }
     public static var motsProches: String { String(localized: "Mots proches", bundle: .module) }
 
-    // Partager
-    public static var partager: String { String(localized: "Partager", bundle: .module) }
-
     // Aide et à propos
     public static var aideEtAPropos: String { String(localized: "Aide et à propos", bundle: .module) }
     public static var aideCommentTitre: String { String(localized: "Comment ça marche ?", bundle: .module) }

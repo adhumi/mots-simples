@@ -8,7 +8,6 @@ struct FicheView: View {
 
     @Environment(Bibliotheque.self) private var bibliotheque
     @Environment(LecteurVocal.self) private var lecteur
-    @Environment(\.configuration) private var configuration
 
     var body: some View {
         Group {
@@ -122,18 +121,6 @@ struct FicheView: View {
             Label(Textes.theme(bibliotheque.dictionnaire.nomDuTheme(fiche.theme)), systemImage: "tag.fill")
                 .police(.note)
                 .foregroundStyle(Jetons.Couleur.texteSecondaire)
-            if !configuration.modeReduit {
-                // Le partage envoie l'adresse de la page web du mot : lisible sans l'app.
-                ShareLink(item: LienDeMot.adresse(slug: fiche.slug, site: configuration.adresseDuSite)) {
-                    Label(Textes.partager, systemImage: "square.and.arrow.up")
-                        .police(.note)
-                        .cibleMinimale()
-                }
-                .buttonStyle(.bordered)
-                .buttonBorderShape(.capsule)
-                .tint(Jetons.Couleur.accent)
-                .accessibilityIdentifier("partager")
-            }
         }
         .carte()
     }

@@ -10,7 +10,7 @@ Il n'a pas encore été essayé à la main. La première étape est donc de le l
 1. Ouvrir `ios/MotsSimples.xcodeproj` dans Xcode 26. S'il ne s'ouvre pas : `ios/README.md`, « Si le projet Xcode ne s'ouvre pas ».
 2. `cd ios/Packages/DictionaryCore && swift test`. 40 tests, sans simulateur.
 3. Compiler l'app pour un simulateur iOS 26. Corriger ce qui bloque. Les endroits les plus risqués sont listés dans le rapport.
-4. Lancer les tests d'interface : 17 tests. L'audit d'accessibilité automatique est désactivé, voir `ios/MotsSimplesUITests/Audit.swift`.
+4. Lancer les tests d'interface : 16 tests. L'audit d'accessibilité automatique est désactivé, voir `ios/MotsSimplesUITests/Audit.swift`.
 
 ## 2. Ce qu'il faut régler dans Xcode
 
@@ -40,7 +40,7 @@ Un build public le refuse, même s'il est déjà sur le téléphone.
 
 ## 4. Avant d'envoyer
 
-- Le site doit être en ligne pour tester la mise à jour du contenu et le partage. Sinon l'app marche, sans ces deux fonctions.
+- Le site doit être en ligne pour tester la mise à jour du contenu. Sinon l'app marche, sans cette fonction.
 - Le point de collecte doit être en ligne pour tester « Demander ce mot ». Sinon, vider `MOTS_SIMPLES_DEMANDES` : le bouton disparaît.
 - Remplacer `EQUIPE_A_REMPLACER` dans `site/public/.well-known/apple-app-site-association`, puis redéployer le site. Sans cela, pas de liens universels.
 - Dans App Store Connect, questionnaire de confidentialité : « Aucune donnée collectée ».
@@ -103,7 +103,6 @@ Le simulateur ne suffit pas pour ces points.
 - [ ] « Dis Siri, expliquer un mot avec Mots simples » : Siri demande le mot, dit la définition, l'app s'ouvre.
 - [ ] Le raccourci « Expliquer un mot » est dans l'app Raccourcis, et peut aller sur le bouton Action.
 - [ ] Toucher un lien `https://motssimples.fr/mot/facture` dans Messages : l'app s'ouvre sur la fiche.
-- [ ] Partager une fiche : le lien reçu s'ouvre dans un navigateur.
 - [ ] Accès d'aide : ajouter Mots simples aux apps, entrer en Accès d'aide. L'app montre seulement Chercher et Fiche.
 
 **Accessibilité**

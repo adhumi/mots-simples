@@ -68,6 +68,7 @@ L'interface de l'app et du site suit les mêmes règles : elle est elle-même é
 | Navigation | Pas de barre d'onglets : accueil (Chercher), bouton « Voir les thèmes », fiche. Pas de « Mes mots » en V1 |
 | Style | Doux et coloré : formes très arrondies, vert calme, police Lexend, cartes blanches sur fond teinté, bordures légères. Liquid Glass réservé aux éléments flottants, contenu opaque |
 | Écoute | « Tout écouter » lit toute la fiche. Un bouton d'écoute par bloc et par mot dans les listes : ces petits boutons montrent l'image seule, sans le mot « Écouter », pour ne pas charger l'écran. C'est la seule exception à « une image et un mot ». Arrêt simple, reprise au début, pas de pause |
+| Partage | Pas de bouton « Partager » sur la fiche : retiré par Adrien. Les liens universels restent : une page web de mot ouvre la fiche dans l'app |
 | Listes de mots | Dans une ligne : l'image, le mot, le bouton d'écoute, puis le chevron en bout de ligne |
 | Accessibilité | Accès d'aide, tailles de texte maximales, VoiceOver, réglages d'affichage, cibles de 44 points au moins |
 | Site | Astro, statique, lisible sans JavaScript, RGAA 4 et WCAG 2.2 AA, aucun cookie, aucune mesure d'audience |
