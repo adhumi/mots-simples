@@ -1,0 +1,48 @@
+schema: 1
+mot: Justificatif de domicile
+slug: justificatif-de-domicile
+prononciation: null
+theme: papiers
+statut: brouillon
+valide_le: null
+
+definition:
+  - Un justificatif de domicile est un document qui prouve où vous habitez.
+  - Il porte votre nom et votre adresse.
+  - C'est souvent une facture récente d'électricité, d'eau ou de téléphone.
+
+exemple: Pour refaire votre carte d'identité, la mairie demande un justificatif de domicile.
+
+autres_sens: []
+
+a_ne_pas_confondre: null
+
+mots_lies:
+  - facture
+  - quittance-de-loyer
+  - piece-d-identite
+  - attestation
+
+formes_de_recherche:
+  - justificatifs de domicile
+  - justificatif domicile
+  - justificatif de domicil
+  - justifcatif de domicile
+  - justificatif d'adresse
+  - preuve de domicile
+  - attestation de domicile
+
+pictogramme:
+  source: arasaac
+  id: null
+  alt: Une facture avec une adresse, à côté d'une maison.
+
+source_de_reference:
+  titre: service-public.fr, page non ouverte
+  url: null
+  consulte_le: 2026-11-27
+
+notes_de_relecture:
+  - Source non ouverte, faute d'accès au web pendant la rédaction. Définition écrite de mémoire, à vérifier sur service-public.fr.
+  - « Récente » ne donne pas de délai précis, c'est voulu. La liste exacte des documents acceptés est dans la source.
+  - « Prouve » est-il compris ? Alternative, « qui montre où vous habitez ».
