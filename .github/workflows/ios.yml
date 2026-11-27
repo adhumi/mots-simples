@@ -93,6 +93,17 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             | tee tests.log | tail -n 200
 
+      # Le journal complet est long : on en sort chaque test, chaque erreur et chaque défaut d'audit.
+      - name: Résumé des tests
+        if: always()
+        run: |
+          if [ -f tests.log ]; then
+            grep -E "Test Case .*(passed|failed)|error:|AUDIT \[|Executed [0-9]+ tests" tests.log || true
+          else
+            echo "Pas de journal de tests : la compilation a échoué. Fin du journal de compilation :"
+            grep -E "error:|warning: .*(concurrency|deprecated)" compilation.log | sort -u | head -n 100 || true
+          fi
+
       # Le résultat contient les captures aux grandes tailles de texte et le détail des audits.
       - name: Garder les journaux et le résultat des tests
         if: always()

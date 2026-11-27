@@ -37,7 +37,7 @@ final class EcransTests: XCTestCase {
         let app = lancer()
         ouvrirLesThemes(app)
         XCTAssertEqual(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'theme-'")).count, 8)
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditDesThemes-1")
     }
 
     @MainActor
@@ -46,7 +46,7 @@ final class EcransTests: XCTestCase {
         ouvrirLesThemes(app)
         app.buttons["theme-argent"].tap()
         XCTAssertTrue(app.buttons["mot-facture"].waitForExistence(timeout: 5))
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditDUnTheme-1")
     }
 
     /// Depuis la liste d'un thème comme depuis la grille, « Retour » ramène à l'accueil.
@@ -66,7 +66,7 @@ final class EcransTests: XCTestCase {
         chercher(app, "girafe")
         XCTAssertTrue(app.staticTexts["Ce mot n'est pas encore dans le dictionnaire."].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["demander-ce-mot"].exists)
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditDuMotAbsent-1")
     }
 
     /// Un texte qui n'est pas un mot ne peut pas partir : le bouton n'apparaît pas.
@@ -85,7 +85,7 @@ final class EcransTests: XCTestCase {
         XCTAssertTrue(aide.waitForExistence(timeout: 5))
         aide.tap()
         XCTAssertTrue(app.buttons["vitesse-lente"].waitForExistence(timeout: 5))
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditDeLAide-1")
         app.buttons["vitesse-lente"].tap()
         XCTAssertTrue(app.buttons["vitesse-lente"].isSelected)
         app.buttons["vitesse-normale"].tap()
@@ -107,17 +107,17 @@ final class EcransTests: XCTestCase {
             XCUIDevice.shared.appearance = apparence
             let app = lancer(tailleDeTexte: "UICTContentSizeCategoryAccessibilityXXXL")
             capturer(app, "accueil-\(nom)")
-            try app.performAccessibilityAudit()
+            try app.auditer("testCapturesAuxGrandesTailles-1")
             ouvrirLesThemes(app)
             capturer(app, "themes-\(nom)")
-            try app.performAccessibilityAudit()
+            try app.auditer("testCapturesAuxGrandesTailles-2")
             app.buttons["theme-logement"].tap()
             XCTAssertTrue(app.buttons["mot-bail"].waitForExistence(timeout: 5))
             capturer(app, "theme-\(nom)")
             app.buttons["mot-bail"].firstMatch.tap()
             XCTAssertTrue(app.staticTexts["fiche-mot"].waitForExistence(timeout: 5))
             capturer(app, "fiche-\(nom)")
-            try app.performAccessibilityAudit()
+            try app.auditer("testCapturesAuxGrandesTailles-3")
             app.terminate()
         }
         XCUIDevice.shared.appearance = .light
@@ -140,6 +140,6 @@ final class EcransTests: XCTestCase {
         chercher(app, "facture")
         app.buttons["mot-facture"].firstMatch.tap()
         XCTAssertTrue(app.buttons["tout-ecouter"].waitForExistence(timeout: 5))
-        try app.performAccessibilityAudit()
+        try app.auditer("testOrientationPaysage-1")
     }
 }

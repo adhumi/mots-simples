@@ -33,22 +33,22 @@ final class AccessibiliteTests: XCTestCase {
     func testAuditDeLAccueil() throws {
         let app = lancer()
         XCTAssertTrue(app.textFields["champ-recherche"].waitForExistence(timeout: 5))
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditDeLAccueil-1")
     }
 
     @MainActor
     func testAuditDUneFiche() throws {
         let app = lancer()
         ouvrirFacture(app)
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditDUneFiche-1")
     }
 
     @MainActor
     func testAuditALaPlusGrandeTailleDeTexte() throws {
         let app = lancer(tailleDeTexte: "UICTContentSizeCategoryAccessibilityXXXL")
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditALaPlusGrandeTailleDeTexte-1")
         ouvrirFacture(app)
-        try app.performAccessibilityAudit()
+        try app.auditer("testAuditALaPlusGrandeTailleDeTexte-2")
     }
 
     /// Du lancement à une fiche : deux touchers, hors saisie. Le critère en demande trois au plus.

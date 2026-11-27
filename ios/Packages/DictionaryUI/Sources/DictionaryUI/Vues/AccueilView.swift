@@ -87,7 +87,12 @@ struct AccueilView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Jetons.Couleur.accent)
                     .accessibilityHidden(true)
-                TextField(Textes.exempleDeRecherche, text: $requete)
+                // Le texte d'exemple prend la couleur secondaire de l'app : le gris du système est trop pâle.
+                TextField(
+                    Textes.exempleDeRecherche,
+                    text: $requete,
+                    prompt: Text(Textes.exempleDeRecherche).foregroundStyle(Jetons.Couleur.texteSecondaire)
+                )
                     .police(.sousTitre)
                     .foregroundStyle(Jetons.Couleur.texte)
                     .textInputAutocapitalization(.never)
