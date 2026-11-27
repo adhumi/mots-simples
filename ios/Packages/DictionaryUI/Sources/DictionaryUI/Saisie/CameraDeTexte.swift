@@ -96,7 +96,6 @@ struct PhotoView: View {
                     choixDuMot
                 }
             }
-            .navigationTitle(Textes.prendreEnPhoto)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

@@ -97,7 +97,6 @@ struct FicheView: View {
         .safeAreaInset(edge: .bottom) {
             BarreToutEcouter(enonces: lecture.tout)
         }
-        .navigationTitle(fiche.mot)
         .onAppear {
             lecteur.arreter()
             bibliotheque.aConsulte(fiche)
