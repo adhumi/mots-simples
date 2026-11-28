@@ -65,9 +65,7 @@ final class DicteeVocale {
             try session.setActive(true, options: [.notifyOthersOnDeactivation])
             let entree = moteur.inputNode
             entree.removeTap(onBus: 0)
-            entree.installTap(onBus: 0, bufferSize: 1024, format: entree.outputFormat(forBus: 0)) { tampon, _ in
-                boite.demande.append(tampon)
-            }
+            Self.brancher(entree, sur: boite)
             moteur.prepare()
             try moteur.start()
         } catch {
@@ -77,9 +75,7 @@ final class DicteeVocale {
         }
 
         etat = .ecoute
-        tache = reconnaisseur.recognitionTask(with: boite.demande) { [weak self] resultat, erreur in
-            let entendu = resultat?.bestTranscription.formattedString
-            let fini = resultat?.isFinal ?? false || erreur != nil
+        tache = Self.reconnaitre(avec: reconnaisseur, boite: boite) { [weak self] entendu, fini in
             Task { @MainActor [weak self] in
                 self?.aEntendu(entendu, fini: fini)
             }
@@ -117,11 +113,35 @@ final class DicteeVocale {
         if etat == .ecoute { etat = .repos }
     }
 
-    private static func autorisationDeReconnaissance() async -> Bool {
+    // Les trois fonctions ci-dessous sont « nonisolated », et c'est essentiel.
+    // Le système appelle leurs blocs hors du fil principal : fil audio, file de la reconnaissance, file des autorisations.
+    // Un bloc écrit dans une méthode du fil principal est lui-même rattaché au fil principal.
+    // Swift 6 arrête alors l'app dès que le système l'appelle d'ailleurs : c'est le plantage de la version 0.1.0 (5).
+
+    /// Demande l'autorisation de reconnaissance vocale. Le système répond sur une file à lui.
+    nonisolated private static func autorisationDeReconnaissance() async -> Bool {
         await withCheckedContinuation { suite in
             SFSpeechRecognizer.requestAuthorization { statut in
                 suite.resume(returning: statut == .authorized)
             }
+        }
+    }
+
+    /// Envoie le son du micro à la demande de reconnaissance. Le bloc tourne sur le fil audio.
+    nonisolated private static func brancher(_ entree: AVAudioInputNode, sur boite: Boite) {
+        entree.installTap(onBus: 0, bufferSize: 1024, format: entree.outputFormat(forBus: 0)) { tampon, _ in
+            boite.demande.append(tampon)
+        }
+    }
+
+    /// Lance la reconnaissance. Le bloc tourne sur une file du système : il ne rend que du texte et un booléen.
+    nonisolated private static func reconnaitre(
+        avec reconnaisseur: SFSpeechRecognizer,
+        boite: Boite,
+        resultat: @escaping @Sendable (_ entendu: String?, _ fini: Bool) -> Void
+    ) -> SFSpeechRecognitionTask {
+        reconnaisseur.recognitionTask(with: boite.demande) { reponse, erreur in
+            resultat(reponse?.bestTranscription.formattedString, reponse?.isFinal ?? false || erreur != nil)
         }
     }
 }
